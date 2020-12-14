@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "CMakeProject1/CMakeProject1.exe"
+			"path" : "Grafica/GUIMetro.exe"
 		},
 		{
-			"path" : "CMakeProject1/CMakeProject1.pdb"
+			"path" : "Grafica/GUIMetro.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -17,7 +17,7 @@
 		],
 		"files" : 
 		[
-			"CMakeProject1/CMakeLists.txt"
+			"Grafica/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -48,7 +48,7 @@
 			]
 		}
 	],
-	"id" : "CMakeProject1::@327dbd380d3205a35d1a",
+	"id" : "GUIMetro::@0dc6c42d09655f58396f",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -68,12 +68,12 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "CMakeProject1",
-	"nameOnDisk" : "CMakeProject1.exe",
+	"name" : "GUIMetro",
+	"nameOnDisk" : "GUIMetro.exe",
 	"paths" : 
 	{
-		"build" : "CMakeProject1",
-		"source" : "CMakeProject1"
+		"build" : "Grafica",
+		"source" : "Grafica"
 	},
 	"sourceGroups" : 
 	[
@@ -83,13 +83,6 @@
 			[
 				0
 			]
-		},
-		{
-			"name" : "Header Files",
-			"sourceIndexes" : 
-			[
-				1
-			]
 		}
 	],
 	"sources" : 
@@ -97,13 +90,8 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "CMakeProject1/CMakeProject1.cpp",
+			"path" : "Grafica/CMakeProject1.cpp",
 			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "CMakeProject1/CMakeProject1.h",
-			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"
