@@ -1,0 +1,5 @@
+C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x86-Debug/CMakeFiles/edit_cache.dir
+C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x86-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x86-Debug/Grafica/CMakeFiles/GUIMetro.dir
+C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x86-Debug/Grafica/CMakeFiles/edit_cache.dir
+C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x86-Debug/Grafica/CMakeFiles/rebuild_cache.dir

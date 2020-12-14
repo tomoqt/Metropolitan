@@ -3,3 +3,7 @@
 1354	2662	629659457	CMakeProject1/CMakeProject1.exe	907368a6214e0dbf
 2	1184	629659746	CMakeProject1/CMakeFiles/GUIMetro.dir/CMakeProject1.cpp.obj	5daea9ec8510ea29
 1185	2308	629659747	CMakeProject1/GUIMetro.exe	c7a0a965c5911417
+2	446	629674531	build.ninja	e62b37b4221222f
+3	438	629674760	build.ninja	e62b37b4221222f
+2	311	629676450	build.ninja	e62b37b4221222f
+2	1301	629676452	Grafica/CMakeFiles/GUIMetro.dir/CMakeProject1.cpp.obj	2bdcd26122fced4a
