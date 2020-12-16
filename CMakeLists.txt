@@ -4,3 +4,4 @@ project ("Metropolitan")
 
 # Include sub-projects.
 add_subdirectory ("Grafica")
+add_subdirectory ("outputGA")

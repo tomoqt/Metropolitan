@@ -6,7 +6,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "out/build/x64-Debug (default)/CMakeFiles/3.18.20081302-MSVC_2/CMakeSystem.cmake"
+			"path" : "out/build/x86-Debug/CMakeFiles/3.18.20081302-MSVC_2/CMakeSystem.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -15,11 +15,11 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "out/build/x64-Debug (default)/CMakeFiles/3.18.20081302-MSVC_2/CMakeCCompiler.cmake"
+			"path" : "out/build/x86-Debug/CMakeFiles/3.18.20081302-MSVC_2/CMakeCCompiler.cmake"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "out/build/x64-Debug (default)/CMakeFiles/3.18.20081302-MSVC_2/CMakeCXXCompiler.cmake"
+			"path" : "out/build/x86-Debug/CMakeFiles/3.18.20081302-MSVC_2/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -73,7 +73,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "out/build/x64-Debug (default)/CMakeFiles/3.18.20081302-MSVC_2/CMakeRCCompiler.cmake"
+			"path" : "out/build/x86-Debug/CMakeFiles/3.18.20081302-MSVC_2/CMakeRCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -130,12 +130,18 @@
 		{
 			"isExternal" : true,
 			"path" : "C:/fltk-1.3.5/build/FLTK-Targets.cmake"
+		},
+		{
+			"path" : "outputGA/CMakeLists.txt"
+		},
+		{
+			"path" : "outputGA/outputMatrice.txt"
 		}
 	],
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)",
+		"build" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x86-Debug",
 		"source" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan"
 	},
 	"version" : 

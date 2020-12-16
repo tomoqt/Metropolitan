@@ -8,7 +8,8 @@
 					"build" : ".",
 					"childIndexes" : 
 					[
-						1
+						1,
+						2
 					],
 					"minimumCMakeVersion" : 
 					{
@@ -30,6 +31,16 @@
 					[
 						0
 					]
+				},
+				{
+					"build" : "outputGA",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "outputGA"
 				}
 			],
 			"name" : "Debug",
@@ -39,7 +50,8 @@
 					"directoryIndexes" : 
 					[
 						0,
-						1
+						1,
+						2
 					],
 					"name" : "Metropolitan",
 					"targetIndexes" : 
@@ -53,7 +65,7 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "GUIMetro::@0dc6c42d09655f58396f",
-					"jsonFile" : "target-GUIMetro-Debug-9c86232e6dceedbd1c4c.json",
+					"jsonFile" : "target-GUIMetro-Debug-693881303201c7691f77.json",
 					"name" : "GUIMetro",
 					"projectIndex" : 0
 				}
