@@ -36,6 +36,30 @@ include CMakeFiles\rules.ninja
 
 
 #############################################
+# Utility command for install/local
+
+build CMakeFiles\install\local.util: CUSTOM_COMMAND all
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build install\local: phony CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build CMakeFiles\install.util: CUSTOM_COMMAND all
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build install: phony CMakeFiles\install.util
+
+
+#############################################
 # Utility command for edit_cache
 
 build CMakeFiles\edit_cache.util: CUSTOM_COMMAND
@@ -57,6 +81,303 @@ build CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
 
 build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 
+
+#############################################
+# Utility command for list_install_components
+
+build list_install_components: phony
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for uninstall
+
+build glfw-3.3.3\uninstall: phony glfw-3.3.3\CMakeFiles\uninstall
+
+
+#############################################
+# Utility command for install/local
+
+build glfw-3.3.3\CMakeFiles\install\local.util: CUSTOM_COMMAND glfw-3.3.3\all
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\glfw-3.3.3" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build glfw-3.3.3\install\local: phony glfw-3.3.3\CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build glfw-3.3.3\CMakeFiles\install.util: CUSTOM_COMMAND glfw-3.3.3\all
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\glfw-3.3.3" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build glfw-3.3.3\install: phony glfw-3.3.3\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build glfw-3.3.3\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\glfw-3.3.3" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build glfw-3.3.3\edit_cache: phony glfw-3.3.3\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build glfw-3.3.3\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\glfw-3.3.3" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan -B"C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)""
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build glfw-3.3.3\rebuild_cache: phony glfw-3.3.3\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build glfw-3.3.3\list_install_components: phony
+
+
+#############################################
+# Custom command for glfw-3.3.3\CMakeFiles\uninstall
+
+build glfw-3.3.3\CMakeFiles\uninstall: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\glfw-3.3.3" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3/cmake_uninstall.cmake""
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/glfw-3.3.3/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build glfw-3.3.3\src\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\glfw-3.3.3\src" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan -B"C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)""
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build glfw-3.3.3\src\rebuild_cache: phony glfw-3.3.3\src\CMakeFiles\rebuild_cache.util
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target glfw
+
+
+#############################################
+# Order-only phony target for glfw
+
+build cmake_object_order_depends_target_glfw: phony || glfw-3.3.3\src\CMakeFiles\glfw.dir
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\context.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\context.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\init.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\init.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\input.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\input.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\monitor.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\monitor.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\vulkan.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\vulkan.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\window.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\window.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_init.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\win32_init.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_joystick.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\win32_joystick.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_monitor.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\win32_monitor.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_time.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\win32_time.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_thread.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\win32_thread.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_window.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\win32_window.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\wgl_context.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\wgl_context.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\egl_context.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\egl_context.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+build glfw-3.3.3\src\CMakeFiles\glfw.dir\osmesa_context.c.obj: C_COMPILER__glfw_Debug ..\..\..\glfw-3.3.3\src\osmesa_context.c || cmake_object_order_depends_target_glfw
+  DEFINES = -D_CRT_SECURE_NO_WARNINGS -D_GLFW_USE_CONFIG_H -D_UNICODE
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1 /W3
+  INCLUDES = -I..\..\..\glfw-3.3.3\include -I..\..\..\glfw-3.3.3\src -Iglfw-3.3.3\src
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  OBJECT_FILE_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target glfw
+
+
+#############################################
+# Link the static library glfw-3.3.3\src\glfw3.lib
+
+build glfw-3.3.3\src\glfw3.lib: C_STATIC_LIBRARY_LINKER__glfw_Debug glfw-3.3.3\src\CMakeFiles\glfw.dir\context.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\init.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\input.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\monitor.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\vulkan.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\window.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_init.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_joystick.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_monitor.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_time.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_thread.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\win32_window.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\wgl_context.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\egl_context.c.obj glfw-3.3.3\src\CMakeFiles\glfw.dir\osmesa_context.c.obj
+  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  LINK_FLAGS = /machine:x64
+  OBJECT_DIR = glfw-3.3.3\src\CMakeFiles\glfw.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = glfw-3.3.3\src\CMakeFiles\glfw.dir\glfw.pdb
+  TARGET_FILE = glfw-3.3.3\src\glfw3.lib
+  TARGET_PDB = glfw-3.3.3\src\glfw3.pdb
+
+
+#############################################
+# Utility command for install/local
+
+build glfw-3.3.3\src\CMakeFiles\install\local.util: CUSTOM_COMMAND glfw-3.3.3\src\all
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\glfw-3.3.3\src" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build glfw-3.3.3\src\install\local: phony glfw-3.3.3\src\CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build glfw-3.3.3\src\CMakeFiles\install.util: CUSTOM_COMMAND glfw-3.3.3\src\all
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\glfw-3.3.3\src" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build glfw-3.3.3\src\install: phony glfw-3.3.3\src\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build glfw-3.3.3\src\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\glfw-3.3.3\src" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build glfw-3.3.3\src\edit_cache: phony glfw-3.3.3\src\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build glfw-3.3.3\src\list_install_components: phony
+
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/CMakeLists.txt
@@ -69,11 +390,11 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 #############################################
 # Order-only phony target for GUIMetro
 
-build cmake_object_order_depends_target_GUIMetro: phony || Grafica\CMakeFiles\GUIMetro.dir
+build cmake_object_order_depends_target_GUIMetro: phony || cmake_object_order_depends_target_glfw
 
 build Grafica\CMakeFiles\GUIMetro.dir\Grafica.cpp.obj: CXX_COMPILER__GUIMetro_Debug ..\..\..\Grafica\Grafica.cpp || cmake_object_order_depends_target_GUIMetro
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
-  INCLUDES = -IC:\fltk-1.3.5\build -IC:\fltk-1.3.5
+  INCLUDES = -I..\..\..\glfw-3.3.3\include
   OBJECT_DIR = Grafica\CMakeFiles\GUIMetro.dir
   OBJECT_FILE_DIR = Grafica\CMakeFiles\GUIMetro.dir
   TARGET_COMPILE_PDB = Grafica\CMakeFiles\GUIMetro.dir\
@@ -87,10 +408,10 @@ build Grafica\CMakeFiles\GUIMetro.dir\Grafica.cpp.obj: CXX_COMPILER__GUIMetro_De
 #############################################
 # Link the executable Grafica\GUIMetro.exe
 
-build Grafica\GUIMetro.exe: CXX_EXECUTABLE_LINKER__GUIMetro_Debug Grafica\CMakeFiles\GUIMetro.dir\Grafica.cpp.obj | C$:\fltk-1.3.5\build\lib\libfltk.a C$:\fltk-1.3.5\build\lib\libfltk_gl.a C$:\fltk-1.3.5\build\lib\libfltk.a
+build Grafica\GUIMetro.exe: CXX_EXECUTABLE_LINKER__GUIMetro_Debug Grafica\CMakeFiles\GUIMetro.dir\Grafica.cpp.obj | glfw-3.3.3\src\glfw3.lib || glfw-3.3.3\src\glfw3.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = C:\fltk-1.3.5\build\lib\libfltk.a  C:\fltk-1.3.5\build\lib\libfltk_gl.a  C:\fltk-1.3.5\build\lib\libfltk.a  comctl32.lib  opengl32.lib  glu32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = glfw-3.3.3\src\glfw3.lib  opengl32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = Grafica\CMakeFiles\GUIMetro.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -98,6 +419,30 @@ build Grafica\GUIMetro.exe: CXX_EXECUTABLE_LINKER__GUIMetro_Debug Grafica\CMakeF
   TARGET_FILE = Grafica\GUIMetro.exe
   TARGET_IMPLIB = Grafica\GUIMetro.lib
   TARGET_PDB = Grafica\GUIMetro.pdb
+
+
+#############################################
+# Utility command for install/local
+
+build Grafica\CMakeFiles\install\local.util: CUSTOM_COMMAND Grafica\all
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\Grafica" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build Grafica\install\local: phony Grafica\CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build Grafica\CMakeFiles\install.util: CUSTOM_COMMAND Grafica\all
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\Grafica" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build Grafica\install: phony Grafica\CMakeFiles\install.util
 
 
 #############################################
@@ -122,10 +467,40 @@ build Grafica\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
 
 build Grafica\rebuild_cache: phony Grafica\CMakeFiles\rebuild_cache.util
 
+
+#############################################
+# Utility command for list_install_components
+
+build Grafica\list_install_components: phony
+
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/CMakeLists.txt
 # =============================================================================
+
+
+#############################################
+# Utility command for install/local
+
+build outputGA\CMakeFiles\install\local.util: CUSTOM_COMMAND outputGA\all
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\outputGA" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build outputGA\install\local: phony outputGA\CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build outputGA\CMakeFiles\install.util: CUSTOM_COMMAND outputGA\all
+  COMMAND = cmd.exe /C "cd /D "C:\Users\TommasoPettinari\source\repos\tomoqt\Metropolitan\out\build\x64-Debug (default)\outputGA" && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build outputGA\install: phony outputGA\CMakeFiles\install.util
 
 
 #############################################
@@ -150,12 +525,24 @@ build outputGA\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
 
 build outputGA\rebuild_cache: phony outputGA\CMakeFiles\rebuild_cache.util
 
+
+#############################################
+# Utility command for list_install_components
+
+build outputGA\list_install_components: phony
+
 # =============================================================================
 # Target aliases.
 
 build GUIMetro: phony Grafica\GUIMetro.exe
 
 build GUIMetro.exe: phony Grafica\GUIMetro.exe
+
+build glfw: phony glfw-3.3.3\src\glfw3.lib
+
+build glfw3.lib: phony glfw-3.3.3\src\glfw3.lib
+
+build uninstall: phony glfw-3.3.3\uninstall
 
 # =============================================================================
 # Folder targets.
@@ -165,7 +552,7 @@ build GUIMetro.exe: phony Grafica\GUIMetro.exe
 #############################################
 # Folder: C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)
 
-build all: phony Grafica\all outputGA\all
+build all: phony glfw-3.3.3\all Grafica\all outputGA\all
 
 # =============================================================================
 
@@ -173,6 +560,20 @@ build all: phony Grafica\all outputGA\all
 # Folder: C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/Grafica
 
 build Grafica\all: phony Grafica\GUIMetro.exe
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3
+
+build glfw-3.3.3\all: phony glfw-3.3.3\src\all
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3/src
+
+build glfw-3.3.3\src\all: phony glfw-3.3.3\src\glfw3.lib
 
 # =============================================================================
 
@@ -188,14 +589,14 @@ build outputGA\all: phony
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ..\..\..\CMakeLists.txt ..\..\..\Grafica\CMakeLists.txt ..\..\..\outputGA\CMakeLists.txt ..\..\..\outputGA\outputMatrice.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\WindowsPaths.cmake C$:\fltk-1.3.5\build\FLTK-Targets.cmake C$:\fltk-1.3.5\build\FLTKConfig.cmake CMakeCache.txt CMakeFiles\3.18.20081302-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ..\..\..\CMakeLists.txt ..\..\..\Grafica\CMakeLists.txt ..\..\..\glfw-3.3.3\CMakeLists.txt ..\..\..\glfw-3.3.3\cmake_uninstall.cmake.in ..\..\..\glfw-3.3.3\src\CMakeLists.txt ..\..\..\glfw-3.3.3\src\glfw3.pc.in ..\..\..\glfw-3.3.3\src\glfw3Config.cmake.in ..\..\..\glfw-3.3.3\src\glfw_config.h.in ..\..\..\outputGA\CMakeLists.txt ..\..\..\outputGA\outputMatrice.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeDependentOption.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CheckIncludeFile.c.in C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CheckIncludeFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CheckLibraryExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\FindOpenGL.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\FindPackageMessage.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\FindThreads.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\GNUInstallDirs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles\3.18.20081302-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ..\..\..\CMakeLists.txt ..\..\..\Grafica\CMakeLists.txt ..\..\..\outputGA\CMakeLists.txt ..\..\..\outputGA\outputMatrice.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\WindowsPaths.cmake C$:\fltk-1.3.5\build\FLTK-Targets.cmake C$:\fltk-1.3.5\build\FLTKConfig.cmake CMakeCache.txt CMakeFiles\3.18.20081302-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeSystem.cmake: phony
+build ..\..\..\CMakeLists.txt ..\..\..\Grafica\CMakeLists.txt ..\..\..\glfw-3.3.3\CMakeLists.txt ..\..\..\glfw-3.3.3\cmake_uninstall.cmake.in ..\..\..\glfw-3.3.3\src\CMakeLists.txt ..\..\..\glfw-3.3.3\src\glfw3.pc.in ..\..\..\glfw-3.3.3\src\glfw3Config.cmake.in ..\..\..\glfw-3.3.3\src\glfw_config.h.in ..\..\..\outputGA\CMakeLists.txt ..\..\..\outputGA\outputMatrice.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeDependentOption.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CheckIncludeFile.c.in C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CheckIncludeFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\CheckLibraryExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\FindOpenGL.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\FindPackageMessage.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\FindThreads.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\GNUInstallDirs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.18\Modules\WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles\3.18.20081302-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.18.20081302-MSVC_2\CMakeSystem.cmake: phony
 
 
 #############################################

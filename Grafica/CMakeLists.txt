@@ -1,8 +1,5 @@
-﻿set(FLTK_DIR C:/fltk-1.3.5/build)
-find_package(FLTK REQUIRED NO_MODULE)
+﻿find_package(OpenGL REQUIRED)
 
 add_executable(GUIMetro Grafica.cpp)
 
-target_include_directories(GUIMetro PUBLIC ${FLTK_INCLUDE_DIRS})
-
-target_link_libraries(GUIMetro fltk fltk_gl)
+target_link_libraries(GUIMetro glfw OpenGL::GL)

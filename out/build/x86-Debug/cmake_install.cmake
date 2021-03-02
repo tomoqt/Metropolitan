@@ -34,6 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+  include("C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x86-Debug/glfw-3.3.3/cmake_install.cmake")
   include("C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x86-Debug/Grafica/cmake_install.cmake")
   include("C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x86-Debug/outputGA/cmake_install.cmake")
 
