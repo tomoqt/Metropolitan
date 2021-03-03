@@ -44,6 +44,15 @@ rule C_STATIC_LIBRARY_LINKER__glfw_Debug
 
 
 #############################################
+# Rule for compiling C files.
+
+rule C_COMPILER__GUIMetro_Debug
+  deps = msvc
+  command = C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1428~1.293\bin\Hostx86\x86\cl.exe  /nologo $DEFINES $INCLUDES $FLAGS /showIncludes /Fo$out /Fd$TARGET_COMPILE_PDB /FS -c $in
+  description = Building C object $out
+
+
+#############################################
 # Rule for compiling CXX files.
 
 rule CXX_COMPILER__GUIMetro_Debug

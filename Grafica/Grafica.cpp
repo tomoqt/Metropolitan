@@ -1,10 +1,9 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <vector>
-#include "FL/Fl.H"
-#include "FL/Fl_Window.H"
-#include "FL/Fl_Button.H"
-#include "FL/Fl_Box.H"
+#define GLFW_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 using namespace std;
 
@@ -44,16 +43,70 @@ void getMatrix()
 
 }
 
+static void error_callback(int error, const char* description)
+{
+	fprintf(stderr, "Error: %s\n", description);
+}
+
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+	if (key == GLFW_KEY_Q && action == GLFW_RELEASE)
+	{
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+		cout << "hai deciso di chiudere la finestra" << endl;
+	}
+}
+
+static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
+
+
 int main()
 {
 	//getMatrix();
-	Fl_Window* window = new Fl_Window(340, 180);
-	/*Fl_Box* box = new Fl_Box(20, 40, 300, 100, "Hello, World!");
-	box->box(FL_UP_BOX);
-	box->labelfont(FL_BOLD + FL_ITALIC);
-	box->labelsize(36);
-	box->labeltype(FL_SHADOW_LABEL);*/
-	window->end();
-	window->show();
-	return Fl::run();
+	
+	glfwSetErrorCallback(error_callback);
+	if (!glfwInit())
+	{
+		cout << "Initialization failed" << endl;
+		exit(EXIT_FAILURE);
+	}
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	GLFWwindow* window = glfwCreateWindow(640, 480, "Metro GUI",NULL, NULL);
+	if (!window)
+	{
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+	
+	glfwSetKeyCallback(window, key_callback);
+	
+	glfwMakeContextCurrent(window);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		cout << "Failed to initialize GLAD" << endl;
+		return -1;
+	}
+	glfwSwapInterval(1);
+
+	while (!glfwWindowShouldClose(window))
+	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+
+	glfwDestroyWindow(window);
+	glfwTerminate();
 }
