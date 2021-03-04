@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/Grafica
+# Install script for directory: C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/Grafica/shaders
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -30,11 +30,5 @@ endif()
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
-endif()
-
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
-  include("C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/Grafica/shaders/cmake_install.cmake")
-
 endif()
 

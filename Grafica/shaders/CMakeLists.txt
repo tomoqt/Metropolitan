@@ -1,0 +1,9 @@
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/vertex
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/shaders)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/fragment
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/shaders)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/vertex
+        ${CMAKE_CURRENT_BINARY_DIR}/shaders COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/fragment
+        ${CMAKE_CURRENT_BINARY_DIR}/shaders COPYONLY)

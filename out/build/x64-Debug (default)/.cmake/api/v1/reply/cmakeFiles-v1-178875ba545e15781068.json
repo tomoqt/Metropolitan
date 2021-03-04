@@ -212,6 +212,15 @@
 			"path" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.18/Modules/FindPackageMessage.cmake"
 		},
 		{
+			"path" : "Grafica/shaders/CMakeLists.txt"
+		},
+		{
+			"path" : "Grafica/shaders/vertex"
+		},
+		{
+			"path" : "Grafica/shaders/fragment"
+		},
+		{
 			"path" : "outputGA/CMakeLists.txt"
 		},
 		{

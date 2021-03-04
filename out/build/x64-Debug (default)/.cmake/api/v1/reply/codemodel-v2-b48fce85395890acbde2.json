@@ -10,7 +10,7 @@
 					[
 						1,
 						3,
-						4
+						5
 					],
 					"hasInstallRule" : true,
 					"minimumCMakeVersion" : 
@@ -56,6 +56,10 @@
 				},
 				{
 					"build" : "Grafica",
+					"childIndexes" : 
+					[
+						4
+					],
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.12"
@@ -67,6 +71,16 @@
 					[
 						0
 					]
+				},
+				{
+					"build" : "Grafica/shaders",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 0,
+					"source" : "Grafica/shaders"
 				},
 				{
 					"build" : "outputGA",
@@ -91,7 +105,8 @@
 					[
 						0,
 						3,
-						4
+						4,
+						5
 					],
 					"name" : "Metropolitan",
 					"targetIndexes" : 
@@ -119,7 +134,7 @@
 				{
 					"directoryIndex" : 3,
 					"id" : "GUIMetro::@0dc6c42d09655f58396f",
-					"jsonFile" : "target-GUIMetro-Debug-868cfe2ceda21115cbf6.json",
+					"jsonFile" : "target-GUIMetro-Debug-b81853693b6950deb7db.json",
 					"name" : "GUIMetro",
 					"projectIndex" : 0
 				},

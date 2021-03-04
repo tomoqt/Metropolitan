@@ -55,3 +55,15 @@
 2001	4169	636473001	Grafica/GUIMetro.exe	baa7e25ea820b8cd
 1	1171	636473187	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	fb147aaf58574bd7
 1172	1761	636473187	Grafica/GUIMetro.exe	baa7e25ea820b8cd
+3	1502	636476125	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	fb147aaf58574bd7
+1503	2573	636476126	Grafica/GUIMetro.exe	baa7e25ea820b8cd
+3	1367	636477534	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	fb147aaf58574bd7
+1367	2288	636477535	Grafica/GUIMetro.exe	baa7e25ea820b8cd
+5	2217	636576461	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	fb147aaf58574bd7
+2230	6183	636576464	Grafica/GUIMetro.exe	baa7e25ea820b8cd
+2	1569	636579427	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	fb147aaf58574bd7
+1570	2548	636579428	Grafica/GUIMetro.exe	baa7e25ea820b8cd
+4	806	636586352	build.ninja	e62b37b4221222f
+2	1614	636586354	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	fb147aaf58574bd7
+9	1782	636586354	Grafica/CMakeFiles/GUIMetro.dir/src/shader.cpp.obj	8104396f1b5b0457
+1782	2972	636586355	Grafica/GUIMetro.exe	8dd3ad003586a19c
