@@ -416,6 +416,14 @@ build Grafica\CMakeFiles\GUIMetro.dir\src\shader.cpp.obj: CXX_COMPILER__GUIMetro
   TARGET_COMPILE_PDB = Grafica\CMakeFiles\GUIMetro.dir\
   TARGET_PDB = Grafica\GUIMetro.pdb
 
+build Grafica\CMakeFiles\GUIMetro.dir\src\datiInput.cpp.obj: CXX_COMPILER__GUIMetro_Debug ..\..\..\Grafica\src\datiInput.cpp || cmake_object_order_depends_target_GUIMetro
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\Grafica\include -I..\..\..\glfw-3.3.3\include
+  OBJECT_DIR = Grafica\CMakeFiles\GUIMetro.dir
+  OBJECT_FILE_DIR = Grafica\CMakeFiles\GUIMetro.dir\src
+  TARGET_COMPILE_PDB = Grafica\CMakeFiles\GUIMetro.dir\
+  TARGET_PDB = Grafica\GUIMetro.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target GUIMetro
@@ -424,7 +432,7 @@ build Grafica\CMakeFiles\GUIMetro.dir\src\shader.cpp.obj: CXX_COMPILER__GUIMetro
 #############################################
 # Link the executable Grafica\GUIMetro.exe
 
-build Grafica\GUIMetro.exe: CXX_EXECUTABLE_LINKER__GUIMetro_Debug Grafica\CMakeFiles\GUIMetro.dir\Grafica.cpp.obj Grafica\CMakeFiles\GUIMetro.dir\src\glad.c.obj Grafica\CMakeFiles\GUIMetro.dir\src\shader.cpp.obj | glfw-3.3.3\src\glfw3.lib || glfw-3.3.3\src\glfw3.lib
+build Grafica\GUIMetro.exe: CXX_EXECUTABLE_LINKER__GUIMetro_Debug Grafica\CMakeFiles\GUIMetro.dir\Grafica.cpp.obj Grafica\CMakeFiles\GUIMetro.dir\src\glad.c.obj Grafica\CMakeFiles\GUIMetro.dir\src\shader.cpp.obj Grafica\CMakeFiles\GUIMetro.dir\src\datiInput.cpp.obj | glfw-3.3.3\src\glfw3.lib || glfw-3.3.3\src\glfw3.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = glfw-3.3.3\src\glfw3.lib  opengl32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

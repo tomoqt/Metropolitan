@@ -5,50 +5,14 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 #include <shader/shader.h>
+#include <datiInput/datiInput.h>
 
 using namespace std;
-
-void getMatrix()
-{
-	int n, m;
-	double c;
-	vector<double> matrice;
-	ifstream input;
-	string fileName("..\\outputGA\\outputMatrice.txt");
-
-	input.open(fileName.c_str());
-
-	if (input.is_open())
-	{
-		input >> n;
-		input >> m;
-
-		for (int i = 0; i < n * m * n * m; i++)
-		{
-			input >> c;
-			matrice.push_back(c);
-		}
-		input.close();
-
-		for (int i = 0; i < n * m * n * m; i++)
-		{
-			cout << matrice[i];
-			if ((i % 12) == 11)
-				cout << endl;
-		}
-	}
-	else
-	{
-		cout << "file non letto" << endl;
-	}
-
-}
 
 static void error_callback(int error, const char* description)
 {
 	fprintf(stderr, "Error: %s\n", description);
 }
-
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -59,16 +23,20 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		cout << "hai deciso di chiudere la finestra" << endl;
 	}
 }
-
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 }
 
+void nodes(unsigned int VAO, unsigned int VBO)
+{
+
+}
+
 int main()
 {
-	////////////////////////////////////////////////////////////////////////////////////
 	//inizializzazione
+	////////////////////////////////////////////////////////////////////////////////////
 	glfwSetErrorCallback(error_callback);
 	if (!glfwInit())
 	{
@@ -99,7 +67,7 @@ int main()
 	}
 	////////////////////////////////////////////////////////////////////////////////////
 
-	Shader shader("shader/vertex", "shader/fragment");
+	Shader shader(".\\shaders\\vertex", ".\\shaders\\fragment");
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
