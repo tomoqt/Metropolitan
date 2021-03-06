@@ -19,3 +19,7 @@
 2447	4298	636751189	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	fb147aaf58574bd7
 2857	4326	636751189	Grafica/CMakeFiles/GUIMetro.dir/src/glad.c.obj	7fed4f44f2acbd98
 4326	5713	636751190	Grafica/GUIMetro.exe	8dd3ad003586a19c
+11	1848	636757157	Grafica/CMakeFiles/GUIMetro.dir/src/datiInput.cpp.obj	8a11146626e3cecc
+16	1864	636757157	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	fb147aaf58574bd7
+3	1879	636757157	Grafica/CMakeFiles/GUIMetro.dir/src/shader.cpp.obj	8104396f1b5b0457
+1880	2916	636757158	Grafica/GUIMetro.exe	d03d99b3886922ab

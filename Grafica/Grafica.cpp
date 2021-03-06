@@ -9,6 +9,8 @@
 
 using namespace std;
 
+static Dati dati("..\\outputGA\\outputMatrice.txt");
+
 static void error_callback(int error, const char* description)
 {
 	fprintf(stderr, "Error: %s\n", description);
@@ -30,7 +32,16 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void nodes(unsigned int VAO, unsigned int VBO)
 {
-
+	int r = dati.getDim()[0];
+	int c = dati.getDim()[1];
+	int nPoints = r * c;
+	vector<double> coordinates;
+	for (int i = 0; i < nPoints; i++)
+	{
+		coordinates.push_back(((double)(i % c)) / ((double)c) * 2 - 0.8);
+		coordinates.push_back((double)((int)(i / c) % r) / ((double)r) * (-2) + 0.8);
+		coordinates.push_back(0);
+	}
 }
 
 int main()
