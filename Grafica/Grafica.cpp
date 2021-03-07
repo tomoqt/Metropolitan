@@ -9,11 +9,19 @@
 
 using namespace std;
 
+//COLORI
+//ROSSO r255 g0 b0
+//ARANCIONE r255 g crescente da 0 a 255 b0
+//GIALLO r255 g255 b0
+//VERDINO r calante da 255 a 0 g255 b0
+//VERDE r0 g255 b0
+
 static Dati dati("..\\outputGA\\outputMatrice.txt");
 
 static void error_callback(int error, const char* description)
 {
 	fprintf(stderr, "Error: %s\n", description);
+	cout << description << endl;
 }
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -30,18 +38,111 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-void nodes(unsigned int VAO, unsigned int VBO)
+void colors()
+{
+
+}
+
+int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint& EBO_ref)
 {
 	int r = dati.getDim()[0];
 	int c = dati.getDim()[1];
 	int nPoints = r * c;
-	vector<double> coordinates;
+	nodes.clear();
+	nodes.shrink_to_fit();
 	for (int i = 0; i < nPoints; i++)
 	{
-		coordinates.push_back(((double)(i % c)) / ((double)c) * 2 - 0.8);
-		coordinates.push_back((double)((int)(i / c) % r) / ((double)r) * (-2) + 0.8);
-		coordinates.push_back(0);
+		nodes.push_back(((double)(i % c)) / ((double)c) * 2 - ((double)c - 1) / (double)c);
+		nodes.push_back((double)((int)(i / c) % r) / ((double)r) * (-2) + ((double)r - 1) / (double)r);
+		nodes.push_back(0);
 	}
+
+	unsigned long long int steps = 360;
+	double radius = 0.05;
+	double angle = 0;
+	vector<double> points;
+	if (nodes.size() == 3 * static_cast<unsigned long long>(nPoints))
+	{
+		for (size_t j = 0; j < nodes.size(); j += 3)
+		{
+			angle = 0;
+			points.push_back(nodes[j]);
+			points.push_back(nodes[j + 1]);
+			points.push_back(nodes[j + 2]);
+			points.push_back(0.0);
+			points.push_back(1.0);
+			points.push_back(0.0);
+			for (int i = 0; i < steps; i++)
+			{
+				double x = radius * cos(angle) + nodes[j];
+				double y = radius * sin(angle) + nodes[j + 1];
+
+				points.push_back(x);
+				points.push_back(y);
+				points.push_back(0);
+				points.push_back(0.0);
+				points.push_back(1.0);
+				points.push_back(0.0);
+
+				angle += 360. / steps;
+			}
+		}
+	}
+	else
+	{
+		cout << "ERRORE1: la size del vector delle coordinate dei nodi non corrisponde" << endl;
+	}
+	
+	vector<unsigned int> indices;
+	unsigned int centro = -(steps + 1);
+	unsigned int vertice = 0;
+	for (size_t i = 0; i < 3 * steps * nPoints; i++)
+	{
+		if (i % 3 == 0)
+		{
+			if (i % (3 * steps) == 0)
+			{
+				centro += (steps+1);
+				vertice++;
+			}
+			indices.push_back(centro);	
+		}
+		else
+		{
+			if (vertice % (steps + 1) == 0)
+			{
+				indices.push_back(vertice - steps);
+			}
+			else
+			{
+				indices.push_back(vertice);
+				if (i % 3 == 1)
+					vertice++;
+			}
+		}
+	}
+
+	glGenVertexArrays(1, &VAO_ref);
+	glGenBuffers(1, &VBO_ref);
+	glGenBuffers(1, &EBO_ref);
+	
+	glBindVertexArray(VAO_ref);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_ref);
+	glBufferData(GL_ARRAY_BUFFER, points.size()*sizeof(double), points.data(), GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_ref);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size()*sizeof(double), indices.data(), GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)(3 * sizeof(double)));
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+	return indices.size();
 }
 
 int main()
@@ -80,62 +181,29 @@ int main()
 
 	Shader shader(".\\shaders\\vertex", ".\\shaders\\fragment");
 
-	// set up vertex data (and buffer(s)) and configure vertex attributes
-	// ------------------------------------------------------------------
-	float vertices[] = {
-		 0.5f,  0.5f, 0.0f,  // top right
-		 0.5f, -0.5f, 0.0f,  // bottom right
-		-0.5f, -0.5f, 0.0f,  // bottom left
-		-0.5f,  0.5f, 0.0f   // top left 
-	};
-	unsigned int indices[] = {  // note that we start from 0!
-		0, 1, 3,  // first Triangle
-		1, 2, 3   // second Triangle
-	};
 
-	unsigned int VBO, VAO, EBO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-	glBindVertexArray(0);
-
+	vector<double> nodes;
+	unsigned int VBO_nodes, VAO_nodes, EBO_nodes;
+	int nPoints = buildNNodes(nodes, VAO_nodes, VBO_nodes, EBO_nodes);
+	
 	//ciclo di rendering
 	while (!glfwWindowShouldClose(window))
 	{
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(0.965, 0.957, 0.859, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		// draw our first triangle
 		shader.use();
-		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-		//glDrawArrays(GL_TRIANGLES, 0, 3);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(VAO_nodes);
+		glDrawElements(GL_TRIANGLES, nPoints, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
 	//deallocazione e chiusura
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
+	glDeleteVertexArrays(1, &VAO_nodes);
+	glDeleteBuffers(1, &VBO_nodes);
+	glDeleteBuffers(1, &EBO_nodes);
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }
