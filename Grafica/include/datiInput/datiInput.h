@@ -15,6 +15,9 @@ public:
 	vector<double> getPopolazione() const;
 	vector<double> getSpostamenti() const;
 	vector<bool> getBinari() const;
+	double getTotPopolazione() const;
+	double getMaxPop() const;
+	double getMinPop() const;
 	void printPopolazione();
 	void printSpostamenti();
 	void printBinari();
@@ -25,5 +28,8 @@ private:
 	vector<double> popolazione;
 	vector<double> spostamenti;
 	vector<bool> binari;
+	double totPopolazione;
+	double maxPop;
+	double minPop;
 };
 #endif

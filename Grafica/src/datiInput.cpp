@@ -3,6 +3,9 @@
 Dati::Dati(const char* path)
 {
 	elementi = 1;
+	totPopolazione = 0;
+	maxPop = 0;
+	minPop = LLONG_MAX;
 	unsigned int c;
 	double d;
 	ifstream input;
@@ -22,7 +25,12 @@ Dati::Dati(const char* path)
 		for (int i = 0; i < elementi; i++)
 		{
 			input >> d;
+			totPopolazione += d;
 			popolazione.push_back(d);
+			if (d > maxPop)
+				maxPop = d;
+			if (d < minPop)
+				minPop = d;
 		}
 
 		//inizializza spostamenti
@@ -65,6 +73,21 @@ vector<double> Dati::getSpostamenti() const
 vector<bool> Dati::getBinari() const
 {
 	return binari;
+}
+
+double Dati::getTotPopolazione() const
+{
+	return totPopolazione;
+}
+
+double Dati::getMaxPop() const
+{
+	return maxPop;
+}
+
+double Dati::getMinPop() const
+{
+	return minPop;
 }
 
 void Dati::printPopolazione()

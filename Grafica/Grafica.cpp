@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <vector>
+#include <array>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -8,13 +9,6 @@
 #include <datiInput/datiInput.h>
 
 using namespace std;
-
-//COLORI
-//ROSSO r255 g0 b0
-//ARANCIONE r255 g crescente da 0 a 255 b0
-//GIALLO r255 g255 b0
-//VERDINO r calante da 255 a 0 g255 b0
-//VERDE r0 g255 b0
 
 static Dati dati("..\\outputGA\\outputMatrice.txt");
 
@@ -38,9 +32,21 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-void colors()
+vector<double> colors(int node)
 {
+	vector<double> color;
+	if ((dati.getPopolazione()[node] / dati.getTotPopolazione()) < (1/(double)(dati.getDim()[0]*dati.getDim()[1])))
+	{
+		color.push_back((dati.getPopolazione()[node] - dati.getMinPop()) / (dati.getTotPopolazione() / 12 - dati.getMinPop()));
+		color.push_back(1.0);
+	}
+	else
+	{
+		color.push_back(1.0);
+		color.push_back(1 - (dati.getPopolazione()[node] - dati.getTotPopolazione() / 12) / (dati.getMaxPop() - dati.getTotPopolazione() / 12));
+	}
 
+	return color;
 }
 
 int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint& EBO_ref)
@@ -50,6 +56,8 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 	int nPoints = r * c;
 	nodes.clear();
 	nodes.shrink_to_fit();
+
+	//coordinate dei nodi
 	for (int i = 0; i < nPoints; i++)
 	{
 		nodes.push_back(((double)(i % c)) / ((double)c) * 2 - ((double)c - 1) / (double)c);
@@ -57,6 +65,7 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 		nodes.push_back(0);
 	}
 
+	//creazione dei punti e dei colori
 	unsigned long long int steps = 360;
 	double radius = 0.05;
 	double angle = 0;
@@ -66,11 +75,12 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 		for (size_t j = 0; j < nodes.size(); j += 3)
 		{
 			angle = 0;
+			vector<double> color = colors(j / 3);
 			points.push_back(nodes[j]);
 			points.push_back(nodes[j + 1]);
 			points.push_back(nodes[j + 2]);
-			points.push_back(0.0);
-			points.push_back(1.0);
+			points.push_back(color[0]);
+			points.push_back(color[1]);
 			points.push_back(0.0);
 			for (int i = 0; i < steps; i++)
 			{
@@ -80,8 +90,8 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 				points.push_back(x);
 				points.push_back(y);
 				points.push_back(0);
-				points.push_back(0.0);
-				points.push_back(1.0);
+				points.push_back(color[0]);
+				points.push_back(color[1]);
 				points.push_back(0.0);
 
 				angle += 360. / steps;
@@ -93,6 +103,7 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 		cout << "ERRORE1: la size del vector delle coordinate dei nodi non corrisponde" << endl;
 	}
 	
+	//creazione buffer degli indici per i punti
 	vector<unsigned int> indices;
 	unsigned int centro = -(steps + 1);
 	unsigned int vertice = 0;
@@ -126,23 +137,73 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 	glGenBuffers(1, &VBO_ref);
 	glGenBuffers(1, &EBO_ref);
 	
+	//vao nodi
 	glBindVertexArray(VAO_ref);
-
 	glBindBuffer(GL_ARRAY_BUFFER, VBO_ref);
 	glBufferData(GL_ARRAY_BUFFER, points.size()*sizeof(double), points.data(), GL_STATIC_DRAW);
-
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_ref);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size()*sizeof(double), indices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size()*sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)0);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)(3 * sizeof(double)));
 	glEnableVertexAttribArray(1);
-
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
 
 	return indices.size();
+}
+
+void buildGrid(const vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref)
+{
+	int r = dati.getDim()[0];
+	int c = dati.getDim()[1];
+
+	vector<double> grid;
+	for (int i = 0; i < nodes.size(); i += (3 * c))
+	{
+		grid.push_back(nodes[i]);
+		grid.push_back(nodes[i + 1]);
+		grid.push_back(nodes[i + 2]);
+		grid.push_back(0.5);
+		grid.push_back(0.5);
+		grid.push_back(0.5);
+
+		grid.push_back(nodes[i + 3 * (c - 1)]);
+		grid.push_back(nodes[i + 3 * (c - 1) + 1]);
+		grid.push_back(nodes[i + 3 * (c - 1) + 2]);
+		grid.push_back(0.5);
+		grid.push_back(0.5);
+		grid.push_back(0.5);
+	}
+	for (int i = 0; i < 3 * c; i += 3)
+	{
+		grid.push_back(nodes[i]);
+		grid.push_back(nodes[i + 1]);
+		grid.push_back(nodes[i + 2]);
+		grid.push_back(0.5);
+		grid.push_back(0.5);
+		grid.push_back(0.5);
+
+		grid.push_back(nodes[i + 3 * (r - 1) * c]);
+		grid.push_back(nodes[i + 3 * (r - 1) * c + 1]);
+		grid.push_back(nodes[i + 3 * (r - 1) * c + 2]);
+		grid.push_back(0.5);
+		grid.push_back(0.5);
+		grid.push_back(0.5);
+	}
+
+	glGenVertexArrays(1, &VAO_ref);
+	glGenBuffers(1, &VBO_ref);
+
+	glBindVertexArray(VAO_ref);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_ref);
+	glBufferData(GL_ARRAY_BUFFER, grid.size() * sizeof(double), grid.data(), GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)(3 * sizeof(double)));
+	glEnableVertexAttribArray(1);
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 int main()
@@ -183,8 +244,11 @@ int main()
 
 
 	vector<double> nodes;
-	unsigned int VBO_nodes, VAO_nodes, EBO_nodes;
+	GLuint VBO_nodes, VAO_nodes, EBO_nodes;
 	int nPoints = buildNNodes(nodes, VAO_nodes, VBO_nodes, EBO_nodes);
+
+	GLuint VBO_grid, VAO_grid;
+	buildGrid(nodes, VAO_grid, VBO_grid);
 	
 	//ciclo di rendering
 	while (!glfwWindowShouldClose(window))
@@ -193,6 +257,9 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		shader.use();
+		glBindVertexArray(VAO_grid);
+		glDrawArrays(GL_LINES, 0, 2 * (dati.getDim()[0] + dati.getDim()[1]));
+		
 		glBindVertexArray(VAO_nodes);
 		glDrawElements(GL_TRIANGLES, nPoints, GL_UNSIGNED_INT, 0);
 
