@@ -35,7 +35,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "Debug"
+			"value" : "RelWithDebInfo"
 		},
 		{
 			"name" : "CMAKE_CACHEFILE_DIR",
@@ -47,7 +47,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)"
+			"value" : "c:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Release"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -739,7 +739,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)"
+			"value" : "C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Release"
 		},
 		{
 			"name" : "CMAKE_INSTALL_RUNSTATEDIR",
@@ -831,7 +831,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/PROGRA~2/MIB055~1/2019/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe"
+			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -1402,18 +1402,6 @@
 			"value" : "[TRUE][v()]"
 		},
 		{
-			"name" : "FLTK_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
-				}
-			],
-			"type" : "PATH",
-			"value" : "C:/fltk-1.3.5"
-		},
-		{
 			"name" : "GLFW_BINARY_DIR",
 			"properties" : 
 			[
@@ -1423,7 +1411,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3"
+			"value" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Release/glfw-3.3.3"
 		},
 		{
 			"name" : "GLFW_BUILD_DOCS",
@@ -1519,7 +1507,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)"
+			"value" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Release"
 		},
 		{
 			"name" : "Metropolitan_SOURCE_DIR",
@@ -1587,7 +1575,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)"
+			"value" : "C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Release"
 		}
 	],
 	"kind" : "cache",

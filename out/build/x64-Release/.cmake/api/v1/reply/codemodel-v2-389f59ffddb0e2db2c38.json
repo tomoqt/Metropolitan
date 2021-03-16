@@ -93,7 +93,7 @@
 					"source" : "outputGA"
 				}
 			],
-			"name" : "Debug",
+			"name" : "RelWithDebInfo",
 			"projects" : 
 			[
 				{
@@ -134,21 +134,21 @@
 				{
 					"directoryIndex" : 3,
 					"id" : "GUIMetro::@0dc6c42d09655f58396f",
-					"jsonFile" : "target-GUIMetro-Debug-34832ebb1dcf50d0018f.json",
+					"jsonFile" : "target-GUIMetro-RelWithDebInfo-69f118e92ba9ca0df4b8.json",
 					"name" : "GUIMetro",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "glfw::@6d1bda5cddf9d3c448b6",
-					"jsonFile" : "target-glfw-Debug-a64622595421576f0cd3.json",
+					"jsonFile" : "target-glfw-RelWithDebInfo-16e211f6025a424c0fea.json",
 					"name" : "glfw",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "uninstall::@d1317316732d2017a30c",
-					"jsonFile" : "target-uninstall-Debug-261fa4401b3b6dc63fd7.json",
+					"jsonFile" : "target-uninstall-RelWithDebInfo-e6ecca7c795ea3f7c623.json",
 					"name" : "uninstall",
 					"projectIndex" : 1
 				}
@@ -158,7 +158,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)",
+		"build" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Release",
 		"source" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan"
 	},
 	"version" : 

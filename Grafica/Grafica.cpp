@@ -7,52 +7,43 @@
 #include <glad/glad.h>
 #include <shader/shader.h>
 #include <datiInput/datiInput.h>
+#include <manager/manager.h>
+#define _USE_MATH_DEFINES
+#include <math.h>
+#define WIDTH 640
+#define HEIGHT 640
 
 using namespace std;
 
-static Dati dati("..\\outputGA\\outputMatrice.txt");
+//sfumature colori piu scuri, variano come prima ma il max e' 182, non 255
 
-static void error_callback(int error, const char* description)
-{
-	fprintf(stderr, "Error: %s\n", description);
-	cout << description << endl;
-}
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
-	if (key == GLFW_KEY_Q && action == GLFW_RELEASE)
-	{
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
-		cout << "hai deciso di chiudere la finestra" << endl;
-	}
-}
-static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	glViewport(0, 0, width, height);
-}
+static void error_callback(int error, const char* description);
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+static void window_close_callback(GLFWwindow* window);
 
-vector<double> colors(int node)
+vector<double> colors(int node, GLFWwindow* window)
 {
 	vector<double> color;
-	if ((dati.getPopolazione()[node] / dati.getTotPopolazione()) < (1/(double)(dati.getDim()[0]*dati.getDim()[1])))
+	if ((static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getPopolazione()[node] / static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getTotPopolazione()) < (1 / (double)(static_cast<Global*>(glfwGetWindowUserPointer(window))->getRaws() * static_cast<Global*>(glfwGetWindowUserPointer(window))->getColumns())))
 	{
-		color.push_back((dati.getPopolazione()[node] - dati.getMinPop()) / (dati.getTotPopolazione() / 12 - dati.getMinPop()));
+		color.push_back((static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getPopolazione()[node] - static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getMinPop()) / (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getTotPopolazione() / 12 - static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getMinPop()));
 		color.push_back(1.0);
 	}
 	else
 	{
 		color.push_back(1.0);
-		color.push_back(1 - (dati.getPopolazione()[node] - dati.getTotPopolazione() / 12) / (dati.getMaxPop() - dati.getTotPopolazione() / 12));
+		color.push_back(1 - (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getPopolazione()[node] - static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getTotPopolazione() / 12) / (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getMaxPop() - static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getTotPopolazione() / 12));
 	}
 
 	return color;
 }
 
-int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint& EBO_ref)
+int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint& EBO_ref, GLFWwindow* window)
 {
-	int r = dati.getDim()[0];
-	int c = dati.getDim()[1];
+	int r = static_cast<Global*>(glfwGetWindowUserPointer(window))->getRaws();
+	int c = static_cast<Global*>(glfwGetWindowUserPointer(window))->getColumns();
 	int nPoints = r * c;
 	nodes.clear();
 	nodes.shrink_to_fit();
@@ -75,7 +66,7 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 		for (size_t j = 0; j < nodes.size(); j += 3)
 		{
 			angle = 0;
-			vector<double> color = colors(j / 3);
+			vector<double> color = colors(j / 3, window);
 			points.push_back(nodes[j]);
 			points.push_back(nodes[j + 1]);
 			points.push_back(nodes[j + 2]);
@@ -89,12 +80,12 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 
 				points.push_back(x);
 				points.push_back(y);
-				points.push_back(0);
+				points.push_back(0.);
 				points.push_back(color[0]);
 				points.push_back(color[1]);
 				points.push_back(0.0);
 
-				angle += 360. / steps;
+				angle += 2 * M_PI / steps;
 			}
 		}
 	}
@@ -102,7 +93,7 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 	{
 		cout << "ERRORE1: la size del vector delle coordinate dei nodi non corrisponde" << endl;
 	}
-	
+
 	//creazione buffer degli indici per i punti
 	vector<unsigned int> indices;
 	unsigned int centro = -(steps + 1);
@@ -113,10 +104,10 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 		{
 			if (i % (3 * steps) == 0)
 			{
-				centro += (steps+1);
+				centro += (steps + 1);
 				vertice++;
 			}
-			indices.push_back(centro);	
+			indices.push_back(centro);
 		}
 		else
 		{
@@ -136,13 +127,13 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 	glGenVertexArrays(1, &VAO_ref);
 	glGenBuffers(1, &VBO_ref);
 	glGenBuffers(1, &EBO_ref);
-	
+
 	//vao nodi
 	glBindVertexArray(VAO_ref);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO_ref);
-	glBufferData(GL_ARRAY_BUFFER, points.size()*sizeof(double), points.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, points.size() * sizeof(double), points.data(), GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_ref);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size()*sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -153,10 +144,10 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 	return indices.size();
 }
 
-void buildGrid(const vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref)
+void buildGrid(const vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLFWwindow* window)
 {
-	int r = dati.getDim()[0];
-	int c = dati.getDim()[1];
+	int r = static_cast<Global*>(glfwGetWindowUserPointer(window))->getRaws();
+	int c = static_cast<Global*>(glfwGetWindowUserPointer(window))->getColumns();
 
 	vector<double> grid;
 	for (int i = 0; i < nodes.size(); i += (3 * c))
@@ -206,8 +197,111 @@ void buildGrid(const vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref)
 	//glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+int checkClick(double x, double y, GLFWwindow* window)
+{
+	int r = static_cast<Global*>(glfwGetWindowUserPointer(window))->getRaws();
+	int c = static_cast<Global*>(glfwGetWindowUserPointer(window))->getColumns();
+	vector<double> nodes = static_cast<Global*>(glfwGetWindowUserPointer(window))->getNodesVector();
+	for (int i = 0; i < 3 * c; i += 3)
+	{
+		if (x > (nodes[i] - 0.05) && x < (nodes[i] + 0.05))
+		{
+			for (int j = 0; j < 3 * r * c; j += 3 * c)
+			{
+				if (y > (nodes[j+1] - 0.05) && y < (nodes[j+1] + 0.05))
+				{
+					static_cast<Global*>(glfwGetWindowUserPointer(window))->setActivatedNode(j / 3 + i / 3);
+					return (j / 3 + i / 3);
+				}
+			}
+		}
+	}
+	static_cast<Global*>(glfwGetWindowUserPointer(window))->setActivatedNode(-1);
+	return -1;
+}
+
+const vector<double> buildLink(const vector<double>& nodes, int nodeNumber, int totalNodes, GLFWwindow* window)
+{
+	double vx = nodes[3 * nodeNumber];
+	double vy = nodes[3 * nodeNumber + 1];
+
+	vector<double> spostamenti;
+	for (int i = 0; i < totalNodes; i++)
+	{
+		spostamenti.push_back(static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getSpostamenti()[nodeNumber * totalNodes + i]);
+	}
+
+	vector<double> data;
+	int steps = 180;
+	double theta, x, y, t;
+	for (int i = 0; i < totalNodes; i++)
+	{
+		double v2x = nodes[3 * i];
+		double v2y = nodes[3 * i + 1];
+
+		double cx = (vx + v2x) / 2;
+		double cy = (vy + v2y) / 2;
+		
+		double majAx = sqrt((vx - cx) * (vx - cx) + (vy - cy) * (vy - cy));
+		double minAx = majAx / 4.;
+
+		double alfa = atan2(v2y - vy, v2x - vx);
+
+		theta = 0;
+		for (int j = 0; j < steps; j++)
+		{
+			x = majAx * cos(theta) + cx;
+			y = minAx * sin(theta) + cy;
+
+			t = x;
+			x = cos(alfa) * x - sin(alfa) * y;
+			y = sin(alfa) * t + cos(alfa) * y;
+
+			data.push_back(x);
+			data.push_back(y);
+			data.push_back(0.);
+
+			data.push_back(0.);
+			data.push_back(0.);
+			data.push_back(1.);
+
+			theta += 2 * M_PI / (double)steps;
+		}
+	}
+
+	return data;
+}
+
+void buildConnections(const vector<double>& nodes, vector<GLuint>& VAO_vec, vector<GLuint>& VBO_vec, GLFWwindow* window)
+{
+	int nodesNumber = VAO_vec.size();
+
+	vector<GLuint>::iterator iterator;
+	iterator = VAO_vec.begin();
+	glGenVertexArrays(nodesNumber, &*iterator);
+	iterator = VBO_vec.begin();
+	glGenBuffers(nodesNumber, &*iterator);
+
+	for (int i = 0; i < nodesNumber; i++)
+	{
+		vector<double> connections = buildLink(nodes, i, nodesNumber, window);
+		
+		glBindVertexArray(VAO_vec[i]);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO_vec[i]);
+		glBufferData(GL_ARRAY_BUFFER, connections.size() * sizeof(double), connections.data(), GL_STATIC_DRAW);
+
+		glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)0);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)(3 * sizeof(double)));
+		glEnableVertexAttribArray(1);
+	}
+}
+
 int main()
 {
+	//recupero dati
+	Global* manager = new Global("..\\outputGA\\outputMatrice.txt");
+
 	//inizializzazione
 	////////////////////////////////////////////////////////////////////////////////////
 	glfwSetErrorCallback(error_callback);
@@ -219,18 +313,22 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	
-	GLFWwindow* window = glfwCreateWindow(640, 480, "Metro GUI", NULL, NULL);
+
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Metro GUI", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 
+	glfwSetWindowCloseCallback(window, window_close_callback);
 	glfwSetKeyCallback(window, key_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	glfwSetWindowUserPointer(window, (void*)manager);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -242,35 +340,102 @@ int main()
 
 	Shader shader(".\\shaders\\vertex", ".\\shaders\\fragment");
 
-
-	vector<double> nodes;
 	GLuint VBO_nodes, VAO_nodes, EBO_nodes;
-	int nPoints = buildNNodes(nodes, VAO_nodes, VBO_nodes, EBO_nodes);
+	int nVertices = buildNNodes(manager->getNodesVector(), VAO_nodes, VBO_nodes, EBO_nodes, window);
 
 	GLuint VBO_grid, VAO_grid;
-	buildGrid(nodes, VAO_grid, VBO_grid);
-	
-	//ciclo di rendering
-	while (!glfwWindowShouldClose(window))
+	buildGrid(manager->getNodesVector(), VAO_grid, VBO_grid, window);
+
+	vector<GLuint> VAO_links, VBO_links;
+	for (int i = 0; i < manager->getRaws() * manager->getColumns(); i++)
+	{
+		VAO_links.push_back(1);
+		VBO_links.push_back(1);
+	}
+	buildConnections(manager->getNodesVector(), VAO_links, VBO_links, window);
+
+	//ciclo di rendering 
+ 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.965, 0.957, 0.859, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		shader.use();
 		glBindVertexArray(VAO_grid);
-		glDrawArrays(GL_LINES, 0, 2 * (dati.getDim()[0] + dati.getDim()[1]));
-		
+		glLineWidth(3);
+		glDrawArrays(GL_LINES, 0, 2 * (manager->getRaws() + manager->getColumns()));
+
 		glBindVertexArray(VAO_nodes);
-		glDrawElements(GL_TRIANGLES, nPoints, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, nVertices, GL_UNSIGNED_INT, 0);
+
+		int activeNode = static_cast<Global*>(glfwGetWindowUserPointer(window))->getActivatedNode();
+		if (activeNode + 1)
+		{
+			glBindVertexArray(VAO_links[activeNode]);
+			glDrawArrays(GL_LINE_STRIP, 0, 180 * manager->getRaws() * manager->getColumns());
+		}
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
 	//deallocazione e chiusura
+	delete manager;
+	manager = NULL;
 	glDeleteVertexArrays(1, &VAO_nodes);
 	glDeleteBuffers(1, &VBO_nodes);
 	glDeleteBuffers(1, &EBO_nodes);
+	glDeleteVertexArrays(1, &VAO_grid);
+	glDeleteBuffers(1, &VBO_grid);
+	vector<GLuint>::iterator iterator;
+	iterator = VAO_links.begin();
+	glDeleteVertexArrays(VAO_links.size(), &*iterator);
+	iterator = VBO_links.begin();
+	glDeleteBuffers(VBO_links.size(), &*iterator);
 	glfwDestroyWindow(window);
 	glfwTerminate();
+}
+
+static void error_callback(int error, const char* description)
+{
+	fprintf(stderr, "Error: %s\n", description);
+	cout << description << endl;
+}
+
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+	if (key == GLFW_KEY_Q && action == GLFW_RELEASE)
+	{
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+		cout << "hai deciso di chiudere la finestra" << endl;
+	}
+}
+
+static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+	{
+		double x, y;
+		glfwGetCursorPos(window, &x, &y);
+		int w, h;
+		glfwGetWindowSize(window, &w, &h);
+
+		x = (x / w) * 2 - 1;
+		y = -(y / h) * 2 + 1;
+
+		cout << checkClick(x, y, window) << endl;
+	}
+}
+
+static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
+
+static void window_close_callback(GLFWwindow* window)
+{
+	//if (!time_to_close)
+	//	glfwSetWindowShouldClose(window, GLFW_FALSE);
 }
