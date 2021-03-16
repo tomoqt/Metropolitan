@@ -12,6 +12,7 @@
 #include <math.h>
 #define WIDTH 640
 #define HEIGHT 640
+#define STEPS 360
 
 using namespace std;
 
@@ -57,7 +58,6 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 	}
 
 	//creazione dei punti e dei colori
-	unsigned long long int steps = 360;
 	double radius = 0.05;
 	double angle = 0;
 	vector<double> points;
@@ -73,7 +73,7 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 			points.push_back(color[0]);
 			points.push_back(color[1]);
 			points.push_back(0.0);
-			for (int i = 0; i < steps; i++)
+			for (int i = 0; i < STEPS; i++)
 			{
 				double x = radius * cos(angle) + nodes[j];
 				double y = radius * sin(angle) + nodes[j + 1];
@@ -85,7 +85,7 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 				points.push_back(color[1]);
 				points.push_back(0.0);
 
-				angle += 2 * M_PI / steps;
+				angle += 2 * M_PI / (double)STEPS;
 			}
 		}
 	}
@@ -96,24 +96,24 @@ int buildNNodes(vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint&
 
 	//creazione buffer degli indici per i punti
 	vector<unsigned int> indices;
-	unsigned int centro = -(steps + 1);
+	unsigned int centro = -(STEPS + 1);
 	unsigned int vertice = 0;
-	for (size_t i = 0; i < 3 * steps * nPoints; i++)
+	for (size_t i = 0; i < 3 * STEPS * nPoints; i++)
 	{
 		if (i % 3 == 0)
 		{
-			if (i % (3 * steps) == 0)
+			if (i % (3 * STEPS) == 0)
 			{
-				centro += (steps + 1);
+				centro += (STEPS + 1);
 				vertice++;
 			}
 			indices.push_back(centro);
 		}
 		else
 		{
-			if (vertice % (steps + 1) == 0)
+			if (vertice % (STEPS + 1) == 0)
 			{
-				indices.push_back(vertice - steps);
+				indices.push_back(vertice - STEPS);
 			}
 			else
 			{
@@ -220,80 +220,94 @@ int checkClick(double x, double y, GLFWwindow* window)
 	return -1;
 }
 
-const vector<double> buildLink(const vector<double>& nodes, int nodeNumber, int totalNodes, GLFWwindow* window)
+const vector<double> buildLink(const vector<double>& nodes, int nodeNumber, int secondNode, GLFWwindow* window)
 {
 	double vx = nodes[3 * nodeNumber];
 	double vy = nodes[3 * nodeNumber + 1];
 
-	vector<double> spostamenti;
+	/*vector<double> spostamenti;
 	for (int i = 0; i < totalNodes; i++)
 	{
 		spostamenti.push_back(static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getSpostamenti()[nodeNumber * totalNodes + i]);
-	}
+	}*/
 
 	vector<double> data;
-	int steps = 180;
 	double theta, x, y, t;
-	for (int i = 0; i < totalNodes; i++)
+	
+	double v2x = nodes[3 * secondNode];
+	double v2y = nodes[3 * secondNode + 1];
+
+	double cx = (vx + v2x) / 2;
+	double cy = (vy + v2y) / 2;
+
+	double majAx = sqrt((vx - cx) * (vx - cx) + (vy - cy) * (vy - cy));
+	double minAx = majAx / 4.;
+
+	double alfa = atan2(v2y - vy, v2x - vx);
+
+	theta = 0;
+	for (int j = 0; j < STEPS / 2; j++)
 	{
-		double v2x = nodes[3 * i];
-		double v2y = nodes[3 * i + 1];
+		x = majAx * cos(theta);
+		y = minAx * sin(theta);
 
-		double cx = (vx + v2x) / 2;
-		double cy = (vy + v2y) / 2;
-		
-		double majAx = sqrt((vx - cx) * (vx - cx) + (vy - cy) * (vy - cy));
-		double minAx = majAx / 4.;
+		t = x;
+		x = cos(alfa) * x - sin(alfa) * y + cx;
+		y = sin(alfa) * t + cos(alfa) * y + cy;
 
-		double alfa = atan2(v2y - vy, v2x - vx);
+		data.push_back(x);
+		data.push_back(y);
+		data.push_back(0.);
 
-		theta = 0;
-		for (int j = 0; j < steps; j++)
-		{
-			x = majAx * cos(theta) + cx;
-			y = minAx * sin(theta) + cy;
+		data.push_back(0.);
+		data.push_back(0.);
+		data.push_back(1.);
 
-			t = x;
-			x = cos(alfa) * x - sin(alfa) * y;
-			y = sin(alfa) * t + cos(alfa) * y;
-
-			data.push_back(x);
-			data.push_back(y);
-			data.push_back(0.);
-
-			data.push_back(0.);
-			data.push_back(0.);
-			data.push_back(1.);
-
-			theta += 2 * M_PI / (double)steps;
-		}
+		theta += 2 * M_PI / (double)STEPS;
 	}
-
 	return data;
 }
 
 void buildConnections(const vector<double>& nodes, vector<GLuint>& VAO_vec, vector<GLuint>& VBO_vec, GLFWwindow* window)
 {
-	int nodesNumber = VAO_vec.size();
+	int nodesNumber = sqrt(VAO_vec.size());
 
 	vector<GLuint>::iterator iterator;
 	iterator = VAO_vec.begin();
-	glGenVertexArrays(nodesNumber, &*iterator);
+	glGenVertexArrays(nodesNumber * nodesNumber, &*iterator);
 	iterator = VBO_vec.begin();
-	glGenBuffers(nodesNumber, &*iterator);
+	glGenBuffers(nodesNumber * nodesNumber, &*iterator);
 
 	for (int i = 0; i < nodesNumber; i++)
 	{
-		vector<double> connections = buildLink(nodes, i, nodesNumber, window);
+		vector<vector<double>> connections;
+		for (int j = 0; j < nodesNumber; j++)
+		{
+			if (j == i)
+			{
+				vector<double> empty;
+				empty.push_back(-2);
+				empty.push_back(-2);
+				empty.push_back(0.);
+				empty.push_back(0.);
+				empty.push_back(0.);
+				empty.push_back(0.);
+				connections.push_back(empty);
+			}
+			else
+			{
+				connections.push_back(buildLink(nodes, i, j, window));
+			}
 		
-		glBindVertexArray(VAO_vec[i]);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO_vec[i]);
-		glBufferData(GL_ARRAY_BUFFER, connections.size() * sizeof(double), connections.data(), GL_STATIC_DRAW);
+			glBindVertexArray(VAO_vec[j + i * nodesNumber]);
+			glBindBuffer(GL_ARRAY_BUFFER, VBO_vec[j + i * nodesNumber]);
+			glBufferData(GL_ARRAY_BUFFER, connections[j].size() * sizeof(double), connections[j].data(), GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)0);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)(3 * sizeof(double)));
-		glEnableVertexAttribArray(1);
+			glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)0);
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 6 * sizeof(double), (void*)(3 * sizeof(double)));
+			glEnableVertexAttribArray(1);
+		}
 	}
 }
 
@@ -347,7 +361,7 @@ int main()
 	buildGrid(manager->getNodesVector(), VAO_grid, VBO_grid, window);
 
 	vector<GLuint> VAO_links, VBO_links;
-	for (int i = 0; i < manager->getRaws() * manager->getColumns(); i++)
+	for (int i = 0; i < manager->getRaws() * manager->getColumns() * manager->getRaws() * manager->getColumns(); i++)
 	{
 		VAO_links.push_back(1);
 		VBO_links.push_back(1);
@@ -365,15 +379,22 @@ int main()
 		glLineWidth(3);
 		glDrawArrays(GL_LINES, 0, 2 * (manager->getRaws() + manager->getColumns()));
 
-		glBindVertexArray(VAO_nodes);
-		glDrawElements(GL_TRIANGLES, nVertices, GL_UNSIGNED_INT, 0);
-
 		int activeNode = static_cast<Global*>(glfwGetWindowUserPointer(window))->getActivatedNode();
 		if (activeNode + 1)
 		{
-			glBindVertexArray(VAO_links[activeNode]);
-			glDrawArrays(GL_LINE_STRIP, 0, 180 * manager->getRaws() * manager->getColumns());
+			for (int i = 0; i < manager->getRaws() * manager->getColumns(); i++)
+			{
+				glBindVertexArray(VAO_links[activeNode * manager->getRaws() * manager->getColumns() + i]);
+				if(i == activeNode)
+					glDrawArrays(GL_LINE_STRIP, 0, 1);
+				else
+					glDrawArrays(GL_LINE_STRIP, 0, STEPS / 2);
+
+			}
 		}
+
+		glBindVertexArray(VAO_nodes);
+		glDrawElements(GL_TRIANGLES, nVertices, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
