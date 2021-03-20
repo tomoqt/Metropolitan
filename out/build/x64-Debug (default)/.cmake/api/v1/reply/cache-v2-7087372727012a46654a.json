@@ -35,7 +35,7 @@
 				}
 			],
 			"type" : "STRING",
-			"value" : "RelWithDebInfo"
+			"value" : "Debug"
 		},
 		{
 			"name" : "CMAKE_CACHEFILE_DIR",
@@ -47,7 +47,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Release"
+			"value" : "c:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -739,7 +739,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Release"
+			"value" : "C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)"
 		},
 		{
 			"name" : "CMAKE_INSTALL_RUNSTATEDIR",
@@ -927,7 +927,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files (x86)/Windows Kits/10/bin/10.0.18362.0/x64/mt.exe"
+			"value" : "C:/Program Files (x86)/Windows Kits/10/bin/10.0.19041.0/x64/mt.exe"
 		},
 		{
 			"name" : "CMAKE_NUMBER_OF_MAKEFILES",
@@ -1063,7 +1063,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files (x86)/Windows Kits/10/bin/10.0.18362.0/x64/rc.exe"
+			"value" : "C:/Program Files (x86)/Windows Kits/10/bin/10.0.19041.0/x64/rc.exe"
 		},
 		{
 			"name" : "CMAKE_RC_COMPILER_WORKS",
@@ -1402,6 +1402,18 @@
 			"value" : "[TRUE][v()]"
 		},
 		{
+			"name" : "FLTK_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/fltk-1.3.5"
+		},
+		{
 			"name" : "GLFW_BINARY_DIR",
 			"properties" : 
 			[
@@ -1411,7 +1423,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Release/glfw-3.3.3"
+			"value" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3"
 		},
 		{
 			"name" : "GLFW_BUILD_DOCS",
@@ -1507,7 +1519,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Release"
+			"value" : "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)"
 		},
 		{
 			"name" : "Metropolitan_SOURCE_DIR",
@@ -1575,7 +1587,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Release"
+			"value" : "C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)"
 		}
 	],
 	"kind" : "cache",

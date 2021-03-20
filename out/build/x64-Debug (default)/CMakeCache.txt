@@ -138,7 +138,7 @@ CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 CMAKE_LINKER:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.28.29333/bin/Hostx64/x64/link.exe
 
 //make program
-CMAKE_MAKE_PROGRAM:FILEPATH=C:/PROGRA~2/MIB055~1/2019/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe
+CMAKE_MAKE_PROGRAM:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -161,7 +161,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=/INCREMENTAL:NO
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //Path to a program.
-CMAKE_MT:FILEPATH=C:/Program Files (x86)/Windows Kits/10/bin/10.0.18362.0/x64/mt.exe
+CMAKE_MT:FILEPATH=C:/Program Files (x86)/Windows Kits/10/bin/10.0.19041.0/x64/mt.exe
 
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
@@ -188,7 +188,7 @@ CMAKE_PROJECT_VERSION_PATCH:STATIC=3
 CMAKE_PROJECT_VERSION_TWEAK:STATIC=
 
 //RC compiler
-CMAKE_RC_COMPILER:FILEPATH=C:/Program Files (x86)/Windows Kits/10/bin/10.0.18362.0/x64/rc.exe
+CMAKE_RC_COMPILER:FILEPATH=C:/Program Files (x86)/Windows Kits/10/bin/10.0.19041.0/x64/rc.exe
 
 //Flags for Windows Resource Compiler during all build types.
 CMAKE_RC_FLAGS:STRING=-DWIN32
