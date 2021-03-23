@@ -225,12 +225,6 @@ const vector<double> buildLink(const vector<double>& nodes, int nodeNumber, int 
 	double vx = nodes[3 * nodeNumber];
 	double vy = nodes[3 * nodeNumber + 1];
 
-	/*vector<double> spostamenti;
-	for (int i = 0; i < totalNodes; i++)
-	{
-		spostamenti.push_back(static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getSpostamenti()[nodeNumber * totalNodes + i]);
-	}*/
-
 	vector<double> data;
 	double theta, x, y, t;
 	
@@ -259,6 +253,7 @@ const vector<double> buildLink(const vector<double>& nodes, int nodeNumber, int 
 		data.push_back(y);
 		data.push_back(0.);
 
+		//cambiare questi colori
 		data.push_back(0.);
 		data.push_back(0.);
 		data.push_back(1.);

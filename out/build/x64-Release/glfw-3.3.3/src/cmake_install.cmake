@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/glfw-3.3.3/src
+# Install script for directory: C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/glfw-3.3.3/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Release")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/Tommaso/Source/Repos/tomoqt/Metropolitan/out/install/x64-Release")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,6 +33,6 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Release/glfw-3.3.3/src/glfw3.lib")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/out/build/x64-Release/glfw-3.3.3/src/glfw3.lib")
 endif()
 
