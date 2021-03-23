@@ -10,8 +10,8 @@
 #include <manager/manager.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
-#define WIDTH 640
-#define HEIGHT 640
+#define WIDTH 1000
+#define HEIGHT 1000
 #define STEPS 360
 
 using namespace std;
@@ -27,15 +27,21 @@ static void window_close_callback(GLFWwindow* window);
 vector<double> colors(int node, GLFWwindow* window)
 {
 	vector<double> color;
-	if ((static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getPopolazione()[node] / static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getTotPopolazione()) < (1 / (double)(static_cast<Global*>(glfwGetWindowUserPointer(window))->getRaws() * static_cast<Global*>(glfwGetWindowUserPointer(window))->getColumns())))
+	double totPop = static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getTotPopolazione();
+	double elements = (double)(static_cast<Global*>(glfwGetWindowUserPointer(window))->getRaws() * static_cast<Global*>(glfwGetWindowUserPointer(window))->getColumns());
+	double mediaPop = totPop / elements;
+	double minPop = static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getMinPop();
+	double maxPop = static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getMaxPop();
+
+	if (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getPopolazione()[node] < mediaPop)
 	{
-		color.push_back((static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getPopolazione()[node] - static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getMinPop()) / (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getTotPopolazione() / 12 - static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getMinPop()));
+		color.push_back((static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getPopolazione()[node] - minPop) / (mediaPop - minPop));
 		color.push_back(1.0);
 	}
 	else
 	{
 		color.push_back(1.0);
-		color.push_back(1 - (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getPopolazione()[node] - static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getTotPopolazione() / 12) / (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getMaxPop() - static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getTotPopolazione() / 12));
+		color.push_back(1 - (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getPopolazione()[node] - mediaPop) / (maxPop - mediaPop));
 	}
 
 	return color;
@@ -222,6 +228,28 @@ int checkClick(double x, double y, GLFWwindow* window)
 
 const vector<double> buildLink(const vector<double>& nodes, int nodeNumber, int secondNode, GLFWwindow* window)
 {
+	//////////////////////////
+	//colors
+	double red, green;
+	double elements = (double)(static_cast<Global*>(glfwGetWindowUserPointer(window))->getRaws() * static_cast<Global*>(glfwGetWindowUserPointer(window))->getColumns());
+	double mediaSpos = 1 / (elements - 1);
+	double minSpos = static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getMinSpos()[nodeNumber];
+	double maxSpos = static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getMaxSpos()[nodeNumber];
+
+	if (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getSpostamenti()[nodeNumber * elements + secondNode] < mediaSpos)
+	{
+		red = (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getSpostamenti()[nodeNumber * elements + secondNode] - minSpos) / (mediaSpos - minSpos);
+		red *= 0.75;
+		green = 0.75;
+	}
+	else
+	{
+		red = 0.75;
+		green = 1 - (static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getSpostamenti()[nodeNumber * elements + secondNode] - mediaSpos) / (maxSpos - mediaSpos);
+		green *= 0.75;
+	}
+	//////////////////////////
+	
 	double vx = nodes[3 * nodeNumber];
 	double vy = nodes[3 * nodeNumber + 1];
 
@@ -254,9 +282,9 @@ const vector<double> buildLink(const vector<double>& nodes, int nodeNumber, int 
 		data.push_back(0.);
 
 		//cambiare questi colori
+		data.push_back(red);
+		data.push_back(green);
 		data.push_back(0.);
-		data.push_back(0.);
-		data.push_back(1.);
 
 		theta += 2 * M_PI / (double)STEPS;
 	}
@@ -379,6 +407,7 @@ int main()
 		{
 			for (int i = 0; i < manager->getRaws() * manager->getColumns(); i++)
 			{
+				glLineWidth(6);
 				glBindVertexArray(VAO_links[activeNode * manager->getRaws() * manager->getColumns() + i]);
 				if(i == activeNode)
 					glDrawArrays(GL_LINE_STRIP, 0, 1);

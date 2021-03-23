@@ -34,10 +34,22 @@ Dati::Dati(const char* path)
 		}
 
 		//inizializza spostamenti
-		for (int i = 0; i < elementi*elementi; i++)
+		for (int i = 0; i < elementi; i++)
 		{
-			input >> d;
-			spostamenti.push_back(d);
+			double maxSpos = 0;
+			double minSpos = 1;
+			
+			for(int j = 0; j < elementi; j++)
+			{
+				input >> d;
+				spostamenti.push_back(d);
+				if (d > maxSpos)
+					maxSpos = d;
+				if (d < minSpos && i != j)
+					minSpos = d;
+			}
+			minSpostamenti.push_back(minSpos);
+			maxSpostamenti.push_back(maxSpos);
 		}
 
 		//inizializza binari
@@ -88,6 +100,16 @@ double Dati::getMaxPop() const
 double Dati::getMinPop() const
 {
 	return minPop;
+}
+
+vector<double> Dati::getMaxSpos() const
+{
+	return maxSpostamenti;
+}
+
+vector<double> Dati::getMinSpos() const
+{
+	return minSpostamenti;
 }
 
 void Dati::printPopolazione()

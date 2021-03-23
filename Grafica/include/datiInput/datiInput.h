@@ -18,6 +18,8 @@ public:
 	double getTotPopolazione() const;
 	double getMaxPop() const;
 	double getMinPop() const;
+	vector<double> getMaxSpos() const;
+	vector<double> getMinSpos() const;
 	void printPopolazione();
 	void printSpostamenti();
 	void printBinari();
@@ -31,5 +33,7 @@ private:
 	double totPopolazione;
 	double maxPop;
 	double minPop;
+	vector<double> maxSpostamenti;
+	vector<double> minSpostamenti;
 };
 #endif
