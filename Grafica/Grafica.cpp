@@ -314,7 +314,7 @@ void buildConnections(const vector<double>& nodes, vector<GLuint>& VAO_vec, vect
 int main()
 {
 	//recupero dati
-	Global* manager = new Global("..\\outputGA\\outputMatrice.txt");
+	shared_ptr<Global> manager = make_shared<Global>("..\\outputGA\\outputMatrice.txt");
 
 	//inizializzazione
 	////////////////////////////////////////////////////////////////////////////////////
@@ -342,7 +342,7 @@ int main()
 	glfwSwapInterval(1);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-	glfwSetWindowUserPointer(window, (void*)manager);
+	glfwSetWindowUserPointer(window, (void*)(manager.get()));
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -401,8 +401,6 @@ int main()
 	}
 
 	//deallocazione e chiusura
-	delete manager;
-	manager = NULL;
 	glDeleteVertexArrays(1, &VAO_nodes);
 	glDeleteBuffers(1, &VBO_nodes);
 	glDeleteBuffers(1, &EBO_nodes);
