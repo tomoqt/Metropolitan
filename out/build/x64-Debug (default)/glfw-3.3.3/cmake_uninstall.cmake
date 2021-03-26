@@ -1,9 +1,9 @@
 
-if (NOT EXISTS "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3/install_manifest.txt")
-  message(FATAL_ERROR "Cannot find install manifest: \"C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3/install_manifest.txt\"")
+if (NOT EXISTS "C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3/install_manifest.txt")
+  message(FATAL_ERROR "Cannot find install manifest: \"C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3/install_manifest.txt\"")
 endif()
 
-file(READ "C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3/install_manifest.txt" files)
+file(READ "C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 
 foreach (file ${files})

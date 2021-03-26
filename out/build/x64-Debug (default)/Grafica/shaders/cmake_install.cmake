@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/TommasoPettinari/source/repos/tomoqt/Metropolitan/Grafica/shaders
+# Install script for directory: C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/Grafica/shaders
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/Tommaso/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

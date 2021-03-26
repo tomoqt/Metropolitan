@@ -1,7 +1,7 @@
-prefix=C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)
+prefix=C:/Users/Tommaso/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)
 exec_prefix=${prefix}
-includedir=C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)/include
-libdir=C:/Users/TommasoPettinari/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)/lib
+includedir=C:/Users/Tommaso/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)/include
+libdir=C:/Users/Tommaso/Source/Repos/tomoqt/Metropolitan/out/install/x64-Debug (default)/lib
 
 Name: GLFW
 Description: A multi-platform library for OpenGL, window and input

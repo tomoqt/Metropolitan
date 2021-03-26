@@ -73,7 +73,6 @@ void Shader::use()
 {
     glUseProgram(ID);
 }
-/*
 void Shader::set(const string& name, bool value) const //bool
 {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);    //bool1
@@ -122,6 +121,7 @@ void Shader::set(const string& name, const glm::vec4& value) const   //vec4
 {
     glUniform4fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
 }
+/*
 void Shader::set(const string& name, const glm::mat2& value) const   //mat2x2
 {
     glUniformMatrix2fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));

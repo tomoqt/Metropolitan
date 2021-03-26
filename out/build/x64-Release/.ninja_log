@@ -18,7 +18,9 @@
 867	1498	6382228548418444	Grafica/CMakeFiles/GUIMetro.dir/src/glad.c.obj	504a8d10f675031e
 1099	1177	6382228545197689	glfw-3.3.3/src/glfw3.lib	ce125c12fb5b869a
 65	1160	6382228544997610	Grafica/CMakeFiles/GUIMetro.dir/src/shader.cpp.obj	6b624acd4aaffa07
-61	1186	6382228545287699	Grafica/CMakeFiles/GUIMetro.dir/src/datiInput.cpp.obj	b91b5812a2c20f32
-849	1648	6382228549898696	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	e32b98f2cb3197a6
-1648	1832	6382228551491073	Grafica/GUIMetro.exe	c86fd4b476e89105
+4	988	6383904672471913	Grafica/CMakeFiles/GUIMetro.dir/src/datiInput.cpp.obj	b91b5812a2c20f32
+3	1102	6383902531330429	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	e32b98f2cb3197a6
+989	1224	6383904674466003	Grafica/GUIMetro.exe	c86fd4b476e89105
 0	18	0	clean	9992afb1f91dc381
+2	862	6383906055139405	Grafica/CMakeFiles/GUIMetro.dir/Grafica.cpp.obj	e32b98f2cb3197a6
+863	1092	6383906057125521	Grafica/GUIMetro.exe	c86fd4b476e89105

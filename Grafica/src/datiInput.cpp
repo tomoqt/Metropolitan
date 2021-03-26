@@ -55,8 +55,11 @@ Dati::Dati(const char* path)
 		//inizializza binari
 		for (int i = 0; i < elementi*elementi; i++)
 		{
-			input >> c;
-			binari.push_back(c);
+			input >> d;
+			if(d > 0.5)
+				binari.push_back(true);
+			else
+				binari.push_back(false);
 		}
 
 		input.close();
@@ -126,7 +129,7 @@ void Dati::printSpostamenti()
 {
 	for (int i = 0; i < elementi*elementi; i++)
 	{
-		cout << popolazione[i];
+		cout << spostamenti[i];
 		if ((i % elementi) == (elementi - 1))
 			cout << endl;
 	}
@@ -136,7 +139,7 @@ void Dati::printBinari()
 {
 	for (int i = 0; i < elementi * elementi; i++)
 	{
-		cout << popolazione[i];
+		cout << binari[i];
 		if ((i % elementi) == (elementi - 1))
 			cout << endl;
 	}

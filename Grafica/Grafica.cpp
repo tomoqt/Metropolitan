@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 #include <shader/shader.h>
+#include <glm/glm/glm.hpp>
 #include <datiInput/datiInput.h>
 #include <manager/manager.h>
 #define _USE_MATH_DEFINES
@@ -15,8 +16,6 @@
 #define STEPS 360
 
 using namespace std;
-
-//sfumature colori piu scuri, variano come prima ma il max e' 182, non 255
 
 static void error_callback(int error, const char* description);
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -226,6 +225,39 @@ int checkClick(double x, double y, GLFWwindow* window)
 	return -1;
 }
 
+int buildRailway(const vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint& EBO_ref, GLFWwindow* window)
+{
+	vector<unsigned int> indices;
+
+	int elements = static_cast<Global*>(glfwGetWindowUserPointer(window))->getRaws() * static_cast<Global*>(glfwGetWindowUserPointer(window))->getColumns();
+	vector<bool> binari = static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getBinari();
+
+	for (auto i = 0; i < elements * elements; i++)
+	{
+		if (binari[i])
+		{
+			indices.push_back(i / elements);
+			indices.push_back(i % elements);
+		}
+	}
+	glGenVertexArrays(1, &VAO_ref);
+	glGenBuffers(1, &VBO_ref);
+	glGenBuffers(1, &EBO_ref);
+
+	glBindVertexArray(VAO_ref);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_ref);
+	glBufferData(GL_ARRAY_BUFFER, nodes.size() * sizeof(double), nodes.data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_ref);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 3 * sizeof(double), (void*)0);
+	glEnableVertexAttribArray(0);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	return indices.size();
+}
+
 const vector<double> buildLink(const vector<double>& nodes, int nodeNumber, int secondNode, GLFWwindow* window)
 {
 	//////////////////////////
@@ -377,12 +409,15 @@ int main()
 
 	Shader shader(".\\shaders\\vertex", ".\\shaders\\fragment");
 
+	//nodi
 	GLuint VBO_nodes, VAO_nodes, EBO_nodes;
 	int nVertices = buildNNodes(manager->getNodesVector(), VAO_nodes, VBO_nodes, EBO_nodes, window);
-
+	
+	//griglia
 	GLuint VBO_grid, VAO_grid;
 	buildGrid(manager->getNodesVector(), VAO_grid, VBO_grid, window);
 
+	//links spostamenti
 	vector<GLuint> VAO_links, VBO_links;
 	for (int i = 0; i < manager->getRaws() * manager->getColumns() * manager->getRaws() * manager->getColumns(); i++)
 	{
@@ -390,6 +425,10 @@ int main()
 		VBO_links.push_back(1);
 	}
 	buildConnections(manager->getNodesVector(), VAO_links, VBO_links, window);
+	
+	//links binari
+	GLuint VBO_railway, VAO_railway, EBO_railway;
+	int nRail = buildRailway(manager->getNodesVector(), VAO_railway, VBO_railway, EBO_railway, window);
 
 	//ciclo di rendering 
  	while (!glfwWindowShouldClose(window))
@@ -401,6 +440,16 @@ int main()
 		glBindVertexArray(VAO_grid);
 		glLineWidth(3);
 		glDrawArrays(GL_LINES, 0, 2 * (manager->getRaws() + manager->getColumns()));
+
+		glBindVertexArray(VAO_railway);
+		shader.set("railway", true);
+		shader.set("StreetColor", glm::vec4(0.13, 0.13, 0.13, 1.0));
+		glLineWidth(16);
+		glDrawElements(GL_LINES, nRail, GL_UNSIGNED_INT, 0);
+		shader.set("StreetColor", glm::vec4(0.95, 0.95, 0.95, 1.0));
+		glLineWidth(3);
+		glDrawElements(GL_LINES, nRail, GL_UNSIGNED_INT, 0);
+		shader.set("railway", false);
 
 		int activeNode = static_cast<Global*>(glfwGetWindowUserPointer(window))->getActivatedNode();
 		if (activeNode + 1)
