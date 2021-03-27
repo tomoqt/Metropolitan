@@ -1,6 +1,6 @@
 #include <manager/manager.h>
 
-Global::Global(const char* path) : activatedNode(-1), dati(path)
+Global::Global(const char* path) : activatedNode(-1), dati(path), railwayStatus(false)
 {
 
 }
@@ -23,6 +23,16 @@ int Global::getActivatedNode() const
 void Global::setActivatedNode(int x)
 {
 	activatedNode = x;
+}
+
+bool Global::getRailwayStatus() const
+{
+	return railwayStatus;
+}
+
+void Global::setRailwayStatus(bool status)
+{
+	railwayStatus = status;
 }
 
 Dati Global::getDati() const

@@ -23,6 +23,14 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 static void window_close_callback(GLFWwindow* window);
 
+void guide()
+{
+	cout << "+++++++++++++++" << '\n' << "+++++++++++++++" << '\n'
+		<< "Cliccare su un nodo per visualizzare il flusso di persone uscente da tale nodo." 
+		<< '\n' << "Premere la barra spaziatrice per visualizzare le stazioni e le linee della metropolitana."
+		<< '\n' << "Premere nuovamente per farle scomparire." << endl;
+}
+
 vector<double> colors(int node, GLFWwindow* window)
 {
 	vector<double> color;
@@ -225,9 +233,10 @@ int checkClick(double x, double y, GLFWwindow* window)
 	return -1;
 }
 
-int buildRailway(const vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint& EBO_ref, GLFWwindow* window)
+vector<int> buildRailway(const vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, GLuint& EBO_ref, GLFWwindow* window)
 {
 	vector<unsigned int> indices;
+	vector<unsigned int> stations;
 
 	int elements = static_cast<Global*>(glfwGetWindowUserPointer(window))->getRaws() * static_cast<Global*>(glfwGetWindowUserPointer(window))->getColumns();
 	vector<bool> binari = static_cast<Global*>(glfwGetWindowUserPointer(window))->getDati().getBinari();
@@ -236,10 +245,18 @@ int buildRailway(const vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, 
 	{
 		if (binari[i])
 		{
+			if (stations.empty())
+				stations.push_back(i / elements);
+			else if(stations.back() != (i / elements))
+				stations.push_back(i / elements);
 			indices.push_back(i / elements);
 			indices.push_back(i % elements);
 		}
 	}
+
+	for (auto i : stations)
+		indices.push_back(i);
+
 	glGenVertexArrays(1, &VAO_ref);
 	glGenBuffers(1, &VBO_ref);
 	glGenBuffers(1, &EBO_ref);
@@ -255,7 +272,10 @@ int buildRailway(const vector<double>& nodes, GLuint& VAO_ref, GLuint& VBO_ref, 
 	
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	return indices.size();
+	vector<int> sizes;
+	sizes.push_back(indices.size() - stations.size());
+	sizes.push_back(stations.size());
+	return sizes;
 }
 
 const vector<double> buildLink(const vector<double>& nodes, int nodeNumber, int secondNode, GLFWwindow* window)
@@ -368,6 +388,7 @@ void buildConnections(const vector<double>& nodes, vector<GLuint>& VAO_vec, vect
 
 int main()
 {
+	guide();
 	//recupero dati
 	shared_ptr<Global> manager = make_shared<Global>("..\\outputGA\\outputMatrice.txt");
 
@@ -428,29 +449,38 @@ int main()
 	
 	//links binari
 	GLuint VBO_railway, VAO_railway, EBO_railway;
-	int nRail = buildRailway(manager->getNodesVector(), VAO_railway, VBO_railway, EBO_railway, window);
+	vector<int> nRail = buildRailway(manager->getNodesVector(), VAO_railway, VBO_railway, EBO_railway, window);
 
 	//ciclo di rendering 
- 	while (!glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.965, 0.957, 0.859, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		//disegnare griglia
 		shader.use();
 		glBindVertexArray(VAO_grid);
 		glLineWidth(3);
 		glDrawArrays(GL_LINES, 0, 2 * (manager->getRaws() + manager->getColumns()));
 
-		glBindVertexArray(VAO_railway);
-		shader.set("railway", true);
-		shader.set("StreetColor", glm::vec4(0.13, 0.13, 0.13, 1.0));
-		glLineWidth(16);
-		glDrawElements(GL_LINES, nRail, GL_UNSIGNED_INT, 0);
-		shader.set("StreetColor", glm::vec4(0.95, 0.95, 0.95, 1.0));
-		glLineWidth(3);
-		glDrawElements(GL_LINES, nRail, GL_UNSIGNED_INT, 0);
-		shader.set("railway", false);
+		//disegnare binari
+		if(static_cast<Global*>(glfwGetWindowUserPointer(window))->getRailwayStatus())
+		{
+			glBindVertexArray(VAO_railway);
+			shader.set("railway", true);
+			shader.set("StreetColor", glm::vec4(0.13, 0.13, 0.13, 1.0));
+			glPointSize(100);
+			glDrawElements(GL_POINTS, nRail[1], GL_UNSIGNED_INT, (void*)(nRail[0] * sizeof(int)));
+			shader.set("StreetColor", glm::vec4(0.13, 0.13, 0.13, 1.0));
+			glLineWidth(16);
+			glDrawElements(GL_LINES, nRail[0], GL_UNSIGNED_INT, 0);
+			shader.set("StreetColor", glm::vec4(0.95, 0.95, 0.95, 1.0));
+			glLineWidth(3);
+			glDrawElements(GL_LINES, nRail[0], GL_UNSIGNED_INT, 0);
+			shader.set("railway", false);
+		}
 
+		//disegnare collegamenti
 		int activeNode = static_cast<Global*>(glfwGetWindowUserPointer(window))->getActivatedNode();
 		if (activeNode + 1)
 		{
@@ -466,6 +496,7 @@ int main()
 			}
 		}
 
+		//disegnare nodi
 		glBindVertexArray(VAO_nodes);
 		glDrawElements(GL_TRIANGLES, nVertices, GL_UNSIGNED_INT, 0);
 
@@ -503,6 +534,13 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 		cout << "hai deciso di chiudere la finestra" << endl;
 	}
+	if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
+	{
+		bool status = static_cast<Global*>(glfwGetWindowUserPointer(window))->getRailwayStatus();
+		status = !status;
+		static_cast<Global*>(glfwGetWindowUserPointer(window))->setRailwayStatus(status);
+		cout << "hai deciso di mostrare i binari" << endl;
+	}
 }
 
 static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -517,7 +555,7 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 		x = (x / w) * 2 - 1;
 		y = -(y / h) * 2 + 1;
 
-		cout << checkClick(x, y, window) << endl;
+		checkClick(x, y, window);
 	}
 }
 
