@@ -37,6 +37,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/glfw-3.3.3/cmake_install.cmake")
   include("C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/Grafica/cmake_install.cmake")
   include("C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/outputGA/cmake_install.cmake")
+  include("C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/GA/cmake_install.cmake")
+  include("C:/Users/Tommaso/source/repos/tomoqt/Metropolitan/out/build/x64-Debug (default)/Images/cmake_install.cmake")
 
 endif()
 

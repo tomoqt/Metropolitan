@@ -9,11 +9,14 @@
 #include <glm/glm/glm.hpp>
 #include <datiInput/datiInput.h>
 #include <manager/manager.h>
+#include <Texture/stb_image.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
 #define WIDTH 1000
 #define HEIGHT 1000
 #define STEPS 360
+
+#include<Windows.h>
 
 using namespace std;
 
@@ -23,12 +26,272 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 static void window_close_callback(GLFWwindow* window);
 
-void guide()
+bool menu()
 {
-	cout << "+++++++++++++++" << '\n' << "+++++++++++++++" << '\n'
-		<< "Cliccare su un nodo per visualizzare il flusso di persone uscente da tale nodo." 
-		<< '\n' << "Premere la barra spaziatrice per visualizzare le stazioni e le linee della metropolitana."
-		<< '\n' << "Premere nuovamente per farle scomparire." << endl;
+	GLFWwindow* MenuWindow = glfwCreateWindow(800, 600, "Metro GUI", NULL, NULL);
+	if (!MenuWindow)
+	{
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+
+	glfwSetWindowCloseCallback(MenuWindow, window_close_callback);
+	glfwMakeContextCurrent(MenuWindow);
+	glfwSwapInterval(1);
+	glfwSetFramebufferSizeCallback(MenuWindow, framebuffer_size_callback);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		cout << "Failed to initialize GLAD" << endl;
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
+
+	Shader textureShader(".\\shaders\\vertexTexture", ".\\shaders\\fragmentTexture");
+	
+	int wTitol, hTitol, nChTitol;
+	unsigned char* dataTitol = stbi_load("..\\Images\\titolo.jpg", &wTitol, &hTitol, &nChTitol, 0);
+	int wIntro, hIntro, nChIntro;
+	unsigned char* dataIntro = stbi_load("..\\Images\\frase.jpg", &wIntro, &hIntro, &nChIntro, 0);
+	int wButNew, hButNew, nChButNew;
+	unsigned char* dataButNew = stbi_load("..\\Images\\buttonNew.jpg", &wButNew, &hButNew, &nChButNew, 0);
+	int wButLoad, hButLoad, nChButLoad;
+	unsigned char* dataButLoad = stbi_load("..\\Images\\buttonLoad.jpg", &wButLoad, &hButLoad, &nChButLoad, 0);
+
+	unsigned int textureTitol, textureIntro, textureButNew, textureButLoad;
+	glGenTextures(1, &textureTitol);
+	glGenTextures(1, &textureIntro);
+	glGenTextures(1, &textureButNew);
+	glGenTextures(1, &textureButLoad);
+
+	glBindTexture(GL_TEXTURE_2D, textureTitol);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (dataTitol)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wTitol, hTitol, 0, GL_RGB, GL_UNSIGNED_BYTE, dataTitol);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		cout << "Failed to load titol texture" << endl;
+	}
+	stbi_image_free(dataTitol);
+
+	glBindTexture(GL_TEXTURE_2D, textureIntro);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (dataIntro)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wIntro, hIntro, 0, GL_RGB, GL_UNSIGNED_BYTE, dataIntro);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		cout << "Failed to load intro texture" << endl;
+	}
+	stbi_image_free(dataIntro);
+
+	glBindTexture(GL_TEXTURE_2D, textureButNew);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (dataButNew)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wButNew, hButNew, 0, GL_RGB, GL_UNSIGNED_BYTE, dataButNew);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		cout << "Failed to load button New texture" << endl;
+	}
+	stbi_image_free(dataButNew);
+
+	glBindTexture(GL_TEXTURE_2D, textureButLoad);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	if (dataButLoad)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wButLoad, hButLoad, 0, GL_RGB, GL_UNSIGNED_BYTE, dataButLoad);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		cout << "Failed to load button Load texture" << endl;
+	}
+	stbi_image_free(dataButLoad);
+
+	double title[] = {
+		 0.8,  0.8,  0.0,   1.0, 0.0, 0.0,  1.0, 1.0,	//top right
+		 0.8,  0.2,  0.0,   1.0, 0.0, 0.0,  1.0, 0.0,	//bottom right
+		-0.8,  0.2,  0.0,   1.0, 0.0, 0.0,  0.0, 0.0,	//bottom left
+		-0.8,  0.8,  0.0,   1.0, 0.0, 0.0,  0.0, 1.0	//top left
+	};
+	double intro[] = {
+		 0.4,  0.1,  0.0,   1.0, 0.0, 0.0,  1.0, 1.0,	//top right
+		 0.4, -0.05, 0.0,   1.0, 0.0, 0.0,  1.0, 0.0,	//bottom right
+		-0.4, -0.05, 0.0,   1.0, 0.0, 0.0,  0.0, 0.0,	//bottom left
+		-0.4,  0.1,  0.0,   1.0, 0.0, 0.0,  0.0, 1.0	//top left
+	};
+	double butNew[] = {
+		-0.2, -0.4,  0.0,   1.0, 0.0, 0.0,  1.0, 1.0,	//top right
+		-0.2, -0.65, 0.0,   1.0, 0.0, 0.0,  1.0, 0.0,	//bottom right
+		-0.8, -0.65, 0.0,   1.0, 0.0, 0.0,  0.0, 0.0,	//bottom left
+		-0.8, -0.4,  0.0,   1.0, 0.0, 0.0,  0.0, 1.0	//top left
+	};
+	double butLoad[] = {
+		 0.8, -0.4,  0.0,   1.0, 0.0, 0.0,  1.0, 1.0,	//top right
+		 0.8, -0.65, 0.0,   1.0, 0.0, 0.0,  1.0, 0.0,	//bottom right
+		 0.2, -0.65, 0.0,   1.0, 0.0, 0.0,  0.0, 0.0,	//bottom left
+		 0.2, -0.4,  0.0,   1.0, 0.0, 0.0,  0.0, 1.0	//top left
+	};
+
+	unsigned int textureIndices[] = {
+		0, 1, 3,
+		1, 2, 3
+	};
+
+	GLuint VBOtitle, VBOintro, VBObutNew, VBObutLoad, VAOtitle, VAOintro, VAObutNew, VAObutLoad, EBO;
+	glGenVertexArrays(1, &VAOtitle);
+	glGenVertexArrays(1, &VAOintro);
+	glGenVertexArrays(1, &VAObutNew);
+	glGenVertexArrays(1, &VAObutLoad);
+	glGenBuffers(1, &VBOtitle);
+	glGenBuffers(1, &VBOintro);
+	glGenBuffers(1, &VBObutNew);
+	glGenBuffers(1, &VBObutLoad);
+	glGenBuffers(1, &EBO);
+	//titolo
+	glBindVertexArray(VAOtitle);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOtitle);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(title), title, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(textureIndices), textureIndices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)(3 * sizeof(double)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)(6 * sizeof(double)));
+	glEnableVertexAttribArray(2);
+	//intro
+	glBindVertexArray(VAOintro);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOintro);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(intro), intro, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(textureIndices), textureIndices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)(3 * sizeof(double)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)(6 * sizeof(double)));
+	glEnableVertexAttribArray(2);
+	//buttonNew
+	glBindVertexArray(VAObutNew);
+	glBindBuffer(GL_ARRAY_BUFFER, VBObutNew);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(butNew), butNew, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(textureIndices), textureIndices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)(3 * sizeof(double)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)(6 * sizeof(double)));
+	glEnableVertexAttribArray(2);
+	//butLoad
+	glBindVertexArray(VAObutLoad);
+	glBindBuffer(GL_ARRAY_BUFFER, VBObutLoad);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(butLoad), butLoad, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(textureIndices), textureIndices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)(3 * sizeof(double)));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_DOUBLE, GL_FALSE, 8 * sizeof(double), (void*)(6 * sizeof(double)));
+	glEnableVertexAttribArray(2);
+
+	bool choice = false;
+	glfwSetWindowUserPointer(MenuWindow, (void*)(&choice));
+	bool runGA = false;
+	glfwSetInputMode(MenuWindow, GLFW_STICKY_MOUSE_BUTTONS, GLFW_TRUE);
+
+	while (!glfwWindowShouldClose(MenuWindow))
+	{
+		// input
+		int state = glfwGetMouseButton(MenuWindow, GLFW_MOUSE_BUTTON_LEFT);
+		if (state == GLFW_PRESS)
+		{
+			double x, y;
+			glfwGetCursorPos(MenuWindow, &x, &y);
+			int w, h;
+			glfwGetWindowSize(MenuWindow, &w, &h);
+
+			x = (x / w) * 2 - 1;
+			y = -(y / h) * 2 + 1;
+			
+			if (y > -0.65 && y < -0.4)
+			{
+				if (x > -0.8 && x < -0.2)
+				{
+					runGA = true;
+					glfwSetWindowShouldClose(MenuWindow, GLFW_TRUE);
+					glfwDestroyWindow(MenuWindow);
+					break;
+				}
+				else if (x > 0.2 && x < 0.8)
+				{
+					glfwSetWindowShouldClose(MenuWindow, GLFW_TRUE);
+					glfwDestroyWindow(MenuWindow);
+					break;
+				}
+			}
+		}
+		
+
+		// render
+		glClearColor(0.965, 0.957, 0.859, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		textureShader.use();
+
+		//titol
+		glBindTexture(GL_TEXTURE_2D, textureTitol);
+		glBindVertexArray(VAOtitle);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		//intro
+		glBindTexture(GL_TEXTURE_2D, textureIntro);
+		glBindVertexArray(VAOintro);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		//buttonNew
+		glBindTexture(GL_TEXTURE_2D, textureButNew);
+		glBindVertexArray(VAObutNew);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		//buttonLoad
+		glBindTexture(GL_TEXTURE_2D, textureButLoad);
+		glBindVertexArray(VAObutLoad);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+		glfwSwapBuffers(MenuWindow);
+		glfwPollEvents();
+	}
+	glDeleteVertexArrays(1, &VAOtitle);
+	glDeleteVertexArrays(1, &VAOintro);
+	glDeleteVertexArrays(1, &VAObutNew);
+	glDeleteVertexArrays(1, &VAObutLoad);
+	glDeleteBuffers(1, &VBOtitle);
+	glDeleteBuffers(1, &VBOintro);
+	glDeleteBuffers(1, &VBObutNew);
+	glDeleteBuffers(1, &VBObutLoad);
+	glDeleteBuffers(1, &EBO);
+
+	return runGA;
 }
 
 vector<double> colors(int node, GLFWwindow* window)
@@ -388,10 +651,6 @@ void buildConnections(const vector<double>& nodes, vector<GLuint>& VAO_vec, vect
 
 int main()
 {
-	guide();
-	//recupero dati
-	shared_ptr<Global> manager = make_shared<Global>("..\\outputGA\\outputMatrice.txt");
-
 	//inizializzazione
 	////////////////////////////////////////////////////////////////////////////////////
 	glfwSetErrorCallback(error_callback);
@@ -404,6 +663,14 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+	//menu principale
+	bool runGA = menu();
+	
+	//FreeConsole();
+
+	//recupero dati
+	shared_ptr<Global> manager = make_shared<Global>("..\\outputGA\\outputMatrice.txt");
+
 	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Metro GUI", NULL, NULL);
 	if (!window)
 	{
@@ -411,12 +678,11 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
-	glfwSetWindowCloseCallback(window, window_close_callback);
-	glfwSetKeyCallback(window, key_callback);
-	glfwSetMouseButtonCallback(window, mouse_button_callback);
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetKeyCallback(window, key_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
 
 	glfwSetWindowUserPointer(window, (void*)(manager.get()));
 
@@ -469,7 +735,7 @@ int main()
 			glBindVertexArray(VAO_railway);
 			shader.set("railway", true);
 			shader.set("StreetColor", glm::vec4(0.13, 0.13, 0.13, 1.0));
-			glPointSize(100);
+			glPointSize(80);
 			glDrawElements(GL_POINTS, nRail[1], GL_UNSIGNED_INT, (void*)(nRail[0] * sizeof(int)));
 			shader.set("StreetColor", glm::vec4(0.13, 0.13, 0.13, 1.0));
 			glLineWidth(16);
@@ -529,17 +795,11 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
-	if (key == GLFW_KEY_Q && action == GLFW_RELEASE)
-	{
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
-		cout << "hai deciso di chiudere la finestra" << endl;
-	}
 	if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
 	{
 		bool status = static_cast<Global*>(glfwGetWindowUserPointer(window))->getRailwayStatus();
 		status = !status;
 		static_cast<Global*>(glfwGetWindowUserPointer(window))->setRailwayStatus(status);
-		cout << "hai deciso di mostrare i binari" << endl;
 	}
 }
 
@@ -566,6 +826,9 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 static void window_close_callback(GLFWwindow* window)
 {
-	//if (!time_to_close)
-	//	glfwSetWindowShouldClose(window, GLFW_FALSE);
+	if (!*(static_cast<bool*>(glfwGetWindowUserPointer(window))))
+	{
+		glfwSetWindowShouldClose(window, GLFW_FALSE);
+		cout << "non è ora di chiudersi, fai la tua scelta" << endl;
+	}
 }

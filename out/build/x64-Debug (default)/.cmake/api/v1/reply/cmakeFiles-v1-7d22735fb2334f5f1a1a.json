@@ -231,10 +231,37 @@
 			"path" : "Grafica/shaders/fragment"
 		},
 		{
+			"path" : "Grafica/shaders/vertexTexture"
+		},
+		{
+			"path" : "Grafica/shaders/fragmentTexture"
+		},
+		{
 			"path" : "outputGA/CMakeLists.txt"
 		},
 		{
 			"path" : "outputGA/outputMatrice.txt"
+		},
+		{
+			"path" : "GA/CMakeLists.txt"
+		},
+		{
+			"path" : "GA/algoritmo_genetico.py"
+		},
+		{
+			"path" : "Images/CMakeLists.txt"
+		},
+		{
+			"path" : "Images/buttonLoad.jpg"
+		},
+		{
+			"path" : "Images/buttonNew.jpg"
+		},
+		{
+			"path" : "Images/frase.jpg"
+		},
+		{
+			"path" : "Images/titolo.jpg"
 		}
 	],
 	"kind" : "cmakeFiles",
